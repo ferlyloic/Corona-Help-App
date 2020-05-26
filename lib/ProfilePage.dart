@@ -2,7 +2,7 @@ import 'package:coronahelpapp/main.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-
+  static const String titleString = "Profil";
   @override
   State<StatefulWidget> createState() {
     return _ProfilePageState();
@@ -14,7 +14,12 @@ class _ProfilePageState extends State<ProfilePage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profil", style:  TextStyle(color: MyApp.getModeInvertedColor(context)),),
+        centerTitle: true,
+        title: Text(ProfilePage.titleString,
+          style:  TextStyle(
+            color: MyApp.getTitleColor(context)
+        ),
+        ),
       ),
     );
   }

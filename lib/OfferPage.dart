@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class OfferPage extends StatefulWidget {
   OfferPage({Key key}) : super(key: key);
-
+  static const String titleString = "Offer";
   @override
   State<StatefulWidget> createState() {
     return _OfferPageState();
@@ -15,7 +15,12 @@ class _OfferPageState extends State<OfferPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Offer", style:  TextStyle(color: MyApp.getModeInvertedColor(context)),),
+        centerTitle: true,
+        title: Text(OfferPage.titleString,
+          style:  TextStyle(
+              color: MyApp.getTitleColor(context)
+          ),
+        ),
       ),
     );
   }
