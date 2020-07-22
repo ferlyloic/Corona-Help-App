@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "674487301731",
+    "firebase_url": "https://corona-help-app-b6c39.firebaseio.com",
+    "project_id": "corona-help-app-b6c39",
+    "storage_bucket": "corona-help-app-b6c39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674487301731:android:f5a397450745b0797f6a56",
+        "android_client_info": {
+          "package_name": "de.hsworms.dfl.coronahelpapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674487301731-gpl2vj7dedltklnijh3jveicifdglnve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo-Qv3cZUU9vPB1TD7TfRuZlcQYAVjsCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674487301731-gpl2vj7dedltklnijh3jveicifdglnve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
