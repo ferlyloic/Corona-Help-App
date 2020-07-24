@@ -1,3 +1,4 @@
+import 'package:coronahelpapp/HomePage.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +18,16 @@ class CustomBarWidget extends StatelessWidget {
             Container(
               color: MyApp.getModeColor(context),
               width: MediaQuery.of(context).size.width,
-              height: 100.0,
+              height: 160.0,
               child: Center(
                 child: Text(
-                  "Home",
-                  style: TextStyle(color: MyApp.getModeInvertedColor(context), fontSize: 22.0),
+                  HomePage.titleString,
+                  style: TextStyle(color: MyApp.getTitleColor(context), fontSize: 22.0),
                 ),
               ),
             ),
             Positioned(
-              top: 80.0,
+              top: 100.0,
               left: 0.0,
               right: 0.0,
               child: Container(
