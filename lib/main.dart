@@ -1,5 +1,5 @@
-import 'package:coronahelpapp/BottomNavigationBar.dart';
-import 'package:coronahelpapp/HomePage.dart';
+import 'package:coronahelpapp/screens/BottomNavigationBar.dart';
+import 'package:coronahelpapp/screens/HomePage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
