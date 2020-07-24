@@ -1,7 +1,9 @@
+import 'package:coronahelpapp/CoolListView.dart';
 import 'package:coronahelpapp/FindPage.dart';
 import 'package:coronahelpapp/HomePage.dart';
 import 'package:coronahelpapp/OfferPage.dart';
 import 'package:coronahelpapp/ProfilePage.dart';
+import 'package:coronahelpapp/TabBar.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +21,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     HomePage(),
     FindPage(),
     OfferPage(),
-    ProfilePage()
+    ProfilePage(),
+    CoolListViewPage()
+//    TabbedAppBarSample(),
   ];
 
   void _onItemTapped(int index) {
@@ -35,28 +39,36 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: MyApp.isDark(context)? Colors.grey : Colors.white54,
 //        selectedItemColor: MyApp.defaultPrimaryColor,
-        selectedItemColor:MyApp.getModeInvertedColor(context),
+        selectedItemColor:MyApp.isDark(context) ? MyApp.getModeInvertedColor(context) : Colors.white,
         backgroundColor: MyApp.getModeColor(context),
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text(HomePage.titleString),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            title: Text('Suchen'),
+            title: Text(FindPage.titleString),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-            title: Text('Anbieten'),
+            title: Text(OfferPage.titleString),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            title: Text('Profil'),
+            title: Text(ProfilePage.titleString),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            title: Text("cool"),
+          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.details),
+//            title: Text('Tab'),
+//          ),
         ],
       ),
     );
