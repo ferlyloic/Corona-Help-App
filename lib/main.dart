@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
 //      print(hue.hue);
 //      defaultColor = hue.toColor();
 //        return defaultColor;
-      return Colors.black;
+      return Colors.black12;
     }
     return MyApp.defaultPrimaryColor;
   }
@@ -62,6 +62,15 @@ class MyApp extends StatelessWidget {
     return MediaQuery
         .of(context)
         .platformBrightness == Brightness.dark;
+  }
+
+  static Color getTitleColor(BuildContext context) {
+    if (MediaQuery
+        .of(context)
+        .platformBrightness == Brightness.light) {
+      return Colors.white;
+    }
+    return MyApp.defaultPrimaryColor;
   }
 }
 
