@@ -1,9 +1,9 @@
-import 'package:coronahelpapp/CoolListView.dart';
-import 'package:coronahelpapp/FindPage.dart';
-import 'package:coronahelpapp/HomePage.dart';
-import 'package:coronahelpapp/OfferPage.dart';
-import 'package:coronahelpapp/ProfilePage.dart';
-import 'package:coronahelpapp/TabBar.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/CoolListView.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/FindPage.dart';
+import 'package:coronahelpapp/screens/HomePage.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/OfferPage.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/ProfilePage.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/TabBar.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/material.dart';
 

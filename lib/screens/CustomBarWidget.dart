@@ -1,4 +1,4 @@
-import 'package:coronahelpapp/HomePage.dart';
+import 'package:coronahelpapp/screens/HomePage.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:coronahelpapp/CustomBarWidget.dart';
+import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/CustomBarWidget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
