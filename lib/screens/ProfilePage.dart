@@ -1,5 +1,5 @@
 import 'package:coronahelpapp/main.dart';
-import 'package:coronahelpapp/screens/LoginPage.dart';
+import 'package:coronahelpapp/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
