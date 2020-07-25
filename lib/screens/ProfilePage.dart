@@ -1,4 +1,5 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/screens/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,9 +15,6 @@ class ProfilePage extends StatefulWidget {
   }
 }
 class _ProfilePageState extends State<ProfilePage>{
-  final _formKey = GlobalKey<FormState>();
-  String _password;
-  String _email;
 
   SharedPreferences sharedPreferences;
   User _user;
@@ -62,14 +60,14 @@ class _ProfilePageState extends State<ProfilePage>{
   void initState() {
     print("init profil");
     super.initState();
-    checkLoginStatus();
+//    checkLoginStatus();
 
   }
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
       setState(() {
 //        print(sharedPreferences.getString("token"));
-          Map userDataArray = sharedPreferences.getString("user")== null ?
+          Map userDataArray = sharedPreferences.getString("user") == null ?
           null : json.decode(sharedPreferences.getString("user"));
           if(userDataArray!=null) {
             isUserConnected = _user != null;
@@ -115,13 +113,6 @@ class _ProfilePageState extends State<ProfilePage>{
                           fit: BoxFit.cover,
                         ),
                       ),
-//                child: null /* add child content here */,
-//                child: Center(
-//
-////                  child: Text('Background image goes here'),
-//
-//
-//                ),
                     ),
                     Expanded(
                       child: Container(
@@ -137,11 +128,8 @@ class _ProfilePageState extends State<ProfilePage>{
                                   isUserConnected = false;
                                   print(sharedPreferences.getString("user"));
                                 });
-
-//
 //                                sharedPreferences.commit();
 //                                AuthService().logout();
-//                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginPage()), (Route<dynamic> route) => false);
                               },)
                             ],
                           ),
@@ -174,72 +162,9 @@ class _ProfilePageState extends State<ProfilePage>{
         : Center(child: CircularProgressIndicator());
   }
 
-  Widget _loginView()  {
-    print("entering method loginView");
-    return Container(
-      padding: EdgeInsets.all(20.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Text(
-              'Login Information',
-              style:
-              TextStyle(fontSize: 20, color: MyApp.defaultPrimaryColor),
-            ),
-            SizedBox(height: 20.0),
-            TextFormField(
-                onSaved: (value) => _email = value,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "Email Address")),
-            TextFormField(
-                onSaved: (value) => _password = value,
-                obscureText: true,
-                decoration: InputDecoration(labelText: "Password")),
-            RaisedButton(
-                color: MyApp.defaultPrimaryColor,
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      color: MyApp.isDark(context)
-                          ? Colors.black
-                          : Colors.white),
-                ),
-                onPressed: () {
-                  print("login pressed");
-                  setState(() {
-                    _getData();
-                    sign();
-                    print(_user);
-                  });
-
-//                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => ProfilePage()), (Route<dynamic> route) => false);
-                }
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-  sign() async{
-    print("entering method sign");
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString("token", 'token');
-    // save the fields..
-    final form = _formKey.currentState;
-    form.save();
-
-    // Validate will return true if is valid, or false if invalid.
-    if (form.validate()) {
-      AuthService().loginUser(email: _email, password: _password);
-      print("$_email $_password");
-    }
-  }
-
   Widget _getLoginOrProfile() {
     print(isUserConnected);
-    return !isUserConnected? _loginView():_profileView();
+    return !isUserConnected? LoginPage():_profileView();
   }
 
 //  getCurrentUser() {
@@ -250,80 +175,6 @@ class _ProfilePageState extends State<ProfilePage>{
 //    });
 //          return current;
 //  }
-}
-class LoginPage extends StatefulWidget {
-  static String titleString = "Login";
 
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  String _password;
-  String _email;
-
-  bool isLoading =false;
-  @override
-  Widget build(BuildContext context) {
-    return  _loginView();
-  }
-  sign() {
-    // save the fields..
-    final form = _formKey.currentState;
-    form.save();
-
-    // Validate will return true if is valid, or false if invalid.
-    if (form.validate()) {
-      AuthService().loginUser(email: _email, password: _password);
-      print("$_email $_password");
-  }
-  }
-
-  Widget _loginView()  {
-
-    return Container(
-      padding: EdgeInsets.all(20.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 20.0),
-            Text(
-              'Login Information',
-              style:
-              TextStyle(fontSize: 20, color: MyApp.defaultPrimaryColor),
-            ),
-            SizedBox(height: 20.0),
-            TextFormField(
-                onSaved: (value) => _email = value,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "Email Address")),
-            TextFormField(
-                onSaved: (value) => _password = value,
-                obscureText: true,
-                decoration: InputDecoration(labelText: "Password")),
-            RaisedButton(
-                color: MyApp.defaultPrimaryColor,
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                      color: MyApp.isDark(context)
-                          ? Colors.black
-                          : Colors.white),
-                ),
-                onPressed: () {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  sign();
-//                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => ProfilePage()), (Route<dynamic> route) => false);
-                  }
-                ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
