@@ -1,11 +1,10 @@
-import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/CoolListView.dart';
-import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/FindPage.dart';
 import 'package:coronahelpapp/screens/HomePage.dart';
-import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/OfferPage.dart';
-import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/ProfilePage.dart';
-import 'file:///C:/Users/ferly/AndroidStudioProjects/corona_help_app/lib/screens/TabBar.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/material.dart';
+import 'CoolListView.dart';
+import 'FindPage.dart';
+import 'OfferPage.dart';
+import 'ProfilePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override
