@@ -39,7 +39,7 @@ class AuthService {
 //    print("new instance of AuthService");
 //  }
 //
-  getCurrentUser(BuildContext context) {
+  User getCurrentUser(BuildContext context) {
     return Provider.of<User>(context);
   }
   void logout() {
