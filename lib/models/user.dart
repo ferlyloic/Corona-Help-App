@@ -21,12 +21,13 @@ class User {
   @override
   String toString() {
     // TODO: update toString
-    return this.uid +
-        ": " +
-        this.firstName +
-        " " +
-        this.lastName +
-        " " +
-        this.birthDate.toString();
+    return this.uid
+//        + ": " +
+//        this.firstName
+//        + " " +
+//        this.lastName
+//        + " " +
+//        this.birthDate.toString()
+    ;
   }
 }
