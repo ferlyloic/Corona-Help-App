@@ -1,23 +1,30 @@
 import 'dart:async';
+import 'package:coronahelpapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthService {
-  static var _currentUser;
+  User _currentUser;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  Future<FirebaseUser> anonymSign() async {
+  Future<User> anonymSign() async {
     try{
       AuthResult result = await _auth.signInAnonymously();
       print(result.toString());
-      FirebaseUser user = result.user;
-      return user;
+      FirebaseUser firebaseUser = result.user;
+
+      return _userFromFirebaseUser(firebaseUser);
     } catch(e) {
       print(e.toString());
       return null;
     }
   }
-
+  
+Stream<User> get user {
+    return _auth.onAuthStateChanged
+//        .map((FirebaseUser firebaseUser) => _userFromFirebaseUser(user));
+        .map(_userFromFirebaseUser);
+}
 //
 //  AuthService() {
 //    print("new instance of AuthService");
@@ -45,23 +52,8 @@ class AuthService {
   Future loginUser({String email, String password}) {
 //    TODO: implement the login logic.
   }
-}
-class User{
-  String username;
-  String firstName;
-  String lastName;
-  DateTime birthDate;
-  String imagePath;
-  User(this.username, this.firstName, this.lastName,this.birthDate, this.imagePath);
-  String fullName() {
-    return this.firstName + " " + this.lastName;
-  }
-  int age(){
-    return DateTime.now().year - birthDate.year;
-  }
-  @override
-  String toString() {
-    // TODO: implement toString
-    return this.firstName + " " + this.lastName + " " + this.birthDate.toString() ;
+
+  User _userFromFirebaseUser(FirebaseUser firebaseUser) {
+    _currentUser = firebaseUser != null ? User(firebaseUser.uid): null;
   }
 }
