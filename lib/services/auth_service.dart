@@ -10,6 +10,7 @@ class AuthService {
   /// return User from firebase user object [firebaseUser].
   User _userFromFirebaseUser(FirebaseUser firebaseUser) {
     _currentUser = firebaseUser != null ? User(firebaseUser.uid) : null;
+    return _currentUser;
   }
 
   Future<User> anonymSign() async {
@@ -17,7 +18,7 @@ class AuthService {
       AuthResult result = await _auth.signInAnonymously();
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
-
+      print(firebaseUser.uid);
       return _userFromFirebaseUser(firebaseUser);
     } catch (e) {
       print(e.toString());
