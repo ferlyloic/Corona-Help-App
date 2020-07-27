@@ -1,7 +1,7 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'CustomBarWidget.dart';
 
@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final User user = AuthService().getCurrentUser(context);
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
