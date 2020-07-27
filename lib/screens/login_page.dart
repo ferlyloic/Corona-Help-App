@@ -1,10 +1,9 @@
 
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget{
   @override
@@ -50,7 +49,7 @@ class LoginPageState extends State<LoginPage>{
                 ),
                 onPressed: () async {
                   print("login pressed");
-                  FirebaseUser user = await _authService.anonymSign();
+                  User user = await _authService.anonymSign();
                   if(user != null) {
                     print("Result: ${user.uid}");
                   }else{
