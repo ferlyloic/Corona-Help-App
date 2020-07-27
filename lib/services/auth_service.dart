@@ -4,10 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthService {
-  User _currentUser;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  User _currentUser;
+  /// return User from firebase user object [firebaseUser].
+  User _userFromFirebaseUser(FirebaseUser firebaseUser) {
+    _currentUser = firebaseUser != null ? User(firebaseUser.uid) : null;
+  }
   Future<User> anonymSign() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
@@ -20,7 +23,7 @@ class AuthService {
       return null;
     }
   }
-
+/// stream user data from firebase into the current user.
   Stream<User> get user {
     return _auth.onAuthStateChanged
 //        .map((FirebaseUser firebaseUser) => _userFromFirebaseUser(user));
@@ -56,7 +59,5 @@ class AuthService {
 //    TODO: implement the login logic.
   }
 
-  User _userFromFirebaseUser(FirebaseUser firebaseUser) {
-    _currentUser = firebaseUser != null ? User(firebaseUser.uid) : null;
-  }
+
 }
