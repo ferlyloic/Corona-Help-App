@@ -10,17 +10,20 @@ import '../services/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String titleString = "Profil";
+
   @override
   State<StatefulWidget> createState() {
     return _ProfilePageState();
   }
 }
-class _ProfilePageState extends State<ProfilePage>{
+
+class _ProfilePageState extends State<ProfilePage> {
   SharedPreferences sharedPreferences;
   User _user;
+
 //  var user;
   final String apiUrl = "https://randomuser.me/api/?results=1";
-  bool isUserConnected =false;
+  bool isUserConnected = false;
 
   Future<void> _getData() async {
     print("entering method detData");
@@ -35,26 +38,26 @@ class _ProfilePageState extends State<ProfilePage>{
     print("init profil");
     super.initState();
 //    checkLoginStatus();
-
   }
+
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
+
   @override
   Widget build(BuildContext context) {
     print("isConnected :$isUserConnected");
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(ProfilePage.titleString,
-          style:  TextStyle(
-            color: MyApp.getTitleColor(context)
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            ProfilePage.titleString,
+            style: TextStyle(color: MyApp.getTitleColor(context)),
+          ),
         ),
-        ),
-      ),
-      body: _getLoginOrProfile()
-    );
+        body: _getLoginOrProfile());
   }
+
   _profileView() {
     print("entering method profileView");
     print("_users = ${_user}");
@@ -83,17 +86,19 @@ class _ProfilePageState extends State<ProfilePage>{
                         child: Center(
                           child: Stack(
                             children: <Widget>[
-                              RaisedButton(child: Text("Logout"),
-                              onPressed: () {
-                                print("Logout pressed");
-                                sharedPreferences.clear();
-                                setState(() {
-                                  isUserConnected = false;
-                                  print(sharedPreferences.getString("user"));
-                                });
+                              RaisedButton(
+                                child: Text("Logout"),
+                                onPressed: () {
+                                  print("Logout pressed");
+                                  sharedPreferences.clear();
+                                  setState(() {
+                                    isUserConnected = false;
+                                    print(sharedPreferences.getString("user"));
+                                  });
 //                                sharedPreferences.commit();
 //                                AuthService().logout();
-                              },)
+                                },
+                              )
                             ],
                           ),
                         ),
@@ -114,11 +119,9 @@ class _ProfilePageState extends State<ProfilePage>{
                           image: NetworkImage(_user.imagePath),
                           fit: BoxFit.cover,
                         ),
-                        color: Colors.green
-                    ),
+                        color: Colors.green),
                   ),
                 ),
-
               ],
             ),
           )
@@ -127,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage>{
 
   Widget _getLoginOrProfile() {
     print(isUserConnected);
-    return !isUserConnected? LoginPage():_profileView();
+    return !isUserConnected ? LoginPage() : _profileView();
   }
 
 //  getCurrentUser() {
@@ -140,4 +143,3 @@ class _ProfilePageState extends State<ProfilePage>{
 //  }
 
 }
-

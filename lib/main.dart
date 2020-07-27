@@ -13,20 +13,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider.value(
         value: AuthService().user,
-    child: MaterialApp(
-      title: 'Corona Help',
-      theme: ThemeData(
-        primarySwatch: defaultPrimaryColor,
-        accentColor: defaultPrimaryColor,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: defaultPrimaryColor,
-        accentColor: defaultPrimaryColor,
-      ),
-      home: MyBottomNavigationBar(),
-    )
-    );
+        child: MaterialApp(
+          title: 'Corona Help',
+          theme: ThemeData(
+            primarySwatch: defaultPrimaryColor,
+            accentColor: defaultPrimaryColor,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            primarySwatch: defaultPrimaryColor,
+            accentColor: defaultPrimaryColor,
+          ),
+          home: MyBottomNavigationBar(),
+        ));
   }
 
   static Color getModeColor(BuildContext context) {
@@ -34,9 +33,7 @@ class MyApp extends StatelessWidget {
   }
 
   static Color getColor(BuildContext context, Brightness brightness) {
-    if (MediaQuery
-        .of(context)
-        .platformBrightness == brightness) {
+    if (MediaQuery.of(context).platformBrightness == brightness) {
 //      Color defaultColor = MyApp.defaultPrimaryColor;
 //      HSLColor hue = HSLColor.fromColor(defaultColor);
 //      print(hue.hue);
@@ -54,18 +51,13 @@ class MyApp extends StatelessWidget {
   }
 
   static bool isDark(BuildContext context) {
-    return MediaQuery
-        .of(context)
-        .platformBrightness == Brightness.dark;
+    return MediaQuery.of(context).platformBrightness == Brightness.dark;
   }
 
   static Color getTitleColor(BuildContext context) {
-    if (MediaQuery
-        .of(context)
-        .platformBrightness == Brightness.light) {
+    if (MediaQuery.of(context).platformBrightness == Brightness.light) {
       return Colors.white;
     }
     return MyApp.defaultPrimaryColor;
   }
 }
-

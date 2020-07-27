@@ -38,9 +38,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
-        unselectedItemColor: MyApp.isDark(context)? Colors.grey : Colors.white54,
+        unselectedItemColor:
+            MyApp.isDark(context) ? Colors.grey : Colors.white54,
 //        selectedItemColor: MyApp.defaultPrimaryColor,
-        selectedItemColor:MyApp.isDark(context) ? MyApp.getModeInvertedColor(context) : Colors.white,
+        selectedItemColor: MyApp.isDark(context)
+            ? MyApp.getModeInvertedColor(context)
+            : Colors.white,
         backgroundColor: MyApp.getModeColor(context),
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[

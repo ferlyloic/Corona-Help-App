@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomBarWidget extends StatelessWidget {
-
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
@@ -22,7 +21,8 @@ class CustomBarWidget extends StatelessWidget {
               child: Center(
                 child: Text(
                   HomePage.titleString,
-                  style: TextStyle(color: MyApp.getTitleColor(context), fontSize: 22.0),
+                  style: TextStyle(
+                      color: MyApp.getTitleColor(context), fontSize: 22.0),
                 ),
               ),
             ),
@@ -37,7 +37,9 @@ class CustomBarWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(1.0),
                       border: Border.all(
                           color: Colors.grey.withOpacity(0.5), width: 1.0),
-                      color: MyApp.isDark(context)?Colors.black87:Colors.white),
+                      color: MyApp.isDark(context)
+                          ? Colors.black87
+                          : Colors.white),
                   child: Row(
                     children: [
                       IconButton(
@@ -55,14 +57,14 @@ class CustomBarWidget extends StatelessWidget {
                           cursorColor: Colors.black,
 //                          keyboardType: inputType,
                           decoration: new InputDecoration(
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              contentPadding:
-                              EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                              hintText: "Search",
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                                left: 15, bottom: 11, top: 11, right: 15),
+                            hintText: "Search",
                           ),
                         ),
                       ),
