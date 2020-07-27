@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         image: DecorationImage(
 //                          image: NetworkImage(_user.imagePath),
                           // TODO: update the image when the user is logged in.
-                          image: AssetImage("assets/default_user.png"),
+                          image: _user.getBackgroundImage(),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -107,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         image: DecorationImage(
 //                          image: NetworkImage(_user.imagePath),
                           // TODO: update the image when the user is logged in.
-                          image: AssetImage("assets/default_user.png"),
+                          image: _user.getProfileImage(),
                           fit: BoxFit.cover,
                         ),
                         color: MyApp.getModeColor(context)),
