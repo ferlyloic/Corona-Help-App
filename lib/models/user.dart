@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class User {
   String username;
@@ -29,5 +30,13 @@ class User {
 //        + " " +
 //        this.birthDate.toString()
     ;
+  }
+
+  getProfileImage() {
+    return AssetImage("assets/default_user.png");
+  }
+
+  getBackgroundImage() {
+    return AssetImage("assets/default.png");
   }
 }
