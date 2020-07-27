@@ -14,20 +14,20 @@ class CustomBarWidget extends StatelessWidget {
         height: 160.0,
         child: Stack(
           children: <Widget>[
-            Container(
-              color: MyApp.getModeColor(context),
-              width: MediaQuery.of(context).size.width,
-              height: 160.0,
-              child: Center(
-                child: Text(
-                  HomePage.titleString,
-                  style: TextStyle(
-                      color: MyApp.getTitleColor(context), fontSize: 22.0),
-                ),
-              ),
-            ),
+//            Container(
+//              color: MyApp.getModeColor(context),
+//              width: MediaQuery.of(context).size.width,
+//              height: 160.0,
+//              child: Center(
+//                child: Text(
+//                  HomePage.titleString,
+//                  style: TextStyle(
+//                      color: MyApp.getTitleColor(context), fontSize: 22.0),
+//                ),
+//              ),
+//            ),
             Positioned(
-              top: 100.0,
+              top: 10.0,
               left: 0.0,
               right: 0.0,
               child: Container(
