@@ -1,12 +1,11 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
-import 'package:coronahelpapp/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-
-import '../services/auth_service.dart';
+import 'package:coronahelpapp/services/auth_service.dart';
+import 'package:coronahelpapp/screens/auth/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String titleString = "Profil";
@@ -81,7 +80,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Stack(
                             children: <Widget>[
                               RaisedButton(
-                                child: Text("Logout"),
+                                color: MyApp.defaultPrimaryColor,
+                                child: Text(
+                                  "Logout",
+                                  style: TextStyle(
+                                      color:
+                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                ),
                                 onPressed: () {
                                   print("Logout pressed");
 //                                  sharedPreferences.clear();
