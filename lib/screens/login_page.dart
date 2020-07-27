@@ -53,6 +53,7 @@ class LoginPageState extends State<LoginPage> {
                     print("Result: ${user.uid}");
                   } else {
 //                    TODO: implement an error response here.
+                    print("Result: no user returned");
                   }
                 }),
           ],
