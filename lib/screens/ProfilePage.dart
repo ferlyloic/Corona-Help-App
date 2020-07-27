@@ -1,4 +1,5 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +16,6 @@ class ProfilePage extends StatefulWidget {
   }
 }
 class _ProfilePageState extends State<ProfilePage>{
-
   SharedPreferences sharedPreferences;
   User _user;
 //  var user;
@@ -24,38 +24,12 @@ class _ProfilePageState extends State<ProfilePage>{
 
   Future<void> _getData() async {
     print("entering method detData");
-    if(sharedPreferences.getString("user")==null)
-      setState(()  {
-        fetchCategories();
-    });
+//    if(sharedPreferences.getString("user")==null)
+//      setState(()  {
+//        fetchCategories();
+//      });
   }
 
-  void fetchCategories() async {
-    Map <String, dynamic> userDataArray = Map();
-    print(apiUrl);
-    await http.get(apiUrl).then((result) {
-      print("print result : ${result.body}");
-      setState(() {
-        userDataArray = json.decode(result.body)['results'][0];
-        print(userDataArray);
-        isUserConnected = userDataArray!= null;
-        print("userIsConnected: $isUserConnected");
-        sharedPreferences.setString("user", json.encode(userDataArray));
-      });
-      _user = User(userDataArray['username'] ,userDataArray['name']['first'],userDataArray['name']['last'],userDataArray['dob']['date'],userDataArray['picture']['large']);
-    });
-
-
-  }
-
-
-  String _location(dynamic user) {
-    return user['location']['country'];
-  }
-
-  String _age(Map<dynamic, dynamic> user) {
-    return "Age: " + user['dob']['age'].toString();
-  }
   @override
   void initState() {
     print("init profil");
@@ -65,16 +39,6 @@ class _ProfilePageState extends State<ProfilePage>{
   }
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
-      setState(() {
-//        print(sharedPreferences.getString("token"));
-          Map userDataArray = sharedPreferences.getString("user") == null ?
-          null : json.decode(sharedPreferences.getString("user"));
-          if(userDataArray!=null) {
-            isUserConnected = _user != null;
-            _user = User(userDataArray['username'] ,userDataArray['name']['first'],userDataArray['name']['last'],userDataArray['dob']['date'],userDataArray['picture']['large']);;
-          }
-          print(_user);
-      });
   }
   @override
   Widget build(BuildContext context) {
@@ -91,7 +55,6 @@ class _ProfilePageState extends State<ProfilePage>{
       body: _getLoginOrProfile()
     );
   }
-
   _profileView() {
     print("entering method profileView");
     print("_users = ${_user}");
