@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -38,8 +39,8 @@ class AuthService {
 //    print("new instance of AuthService");
 //  }
 //
-  getUser() {
-    return _currentUser;
+  getCurrentUser(BuildContext context) {
+    return Provider.of<User>(context);
   }
   void logout() {
     _auth.signOut();
