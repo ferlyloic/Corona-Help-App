@@ -20,32 +20,24 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   SharedPreferences sharedPreferences;
   User _user;
-
-//  var user;
-  final String apiUrl = "https://randomuser.me/api/?results=1";
   bool isUserConnected = false;
 
   Future<void> _getData() async {
+    // TODO use this function or delete it.
     print("entering method detData");
-//    if(sharedPreferences.getString("user")==null)
-//      setState(()  {
-//        fetchCategories();
-//      });
   }
 
   @override
   void initState() {
     print("init profil");
     super.initState();
-//    checkLoginStatus();
-  }
-
-  checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
   }
 
   @override
   Widget build(BuildContext context) {
+     _user = AuthService().getCurrentUser(context);
+     print(_user);
+     isUserConnected = _user != null;
     print("isConnected :$isUserConnected");
     return Scaffold(
         appBar: AppBar(
@@ -75,7 +67,9 @@ class _ProfilePageState extends State<ProfilePage> {
 //              color: Colors.orange,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(_user.imagePath),
+//                          image: NetworkImage(_user.imagePath),
+                          // TODO: update the image when the user is logged in.
+                          image: AssetImage("assets/default_user.png"),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -90,13 +84,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Text("Logout"),
                                 onPressed: () {
                                   print("Logout pressed");
-                                  sharedPreferences.clear();
-                                  setState(() {
-                                    isUserConnected = false;
-                                    print(sharedPreferences.getString("user"));
-                                  });
-//                                sharedPreferences.commit();
-//                                AuthService().logout();
+//                                  sharedPreferences.clear();
+                                  AuthService().logout();
                                 },
                               )
                             ],
@@ -116,10 +105,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: NetworkImage(_user.imagePath),
+//                          image: NetworkImage(_user.imagePath),
+                          // TODO: update the image when the user is logged in.
+                          image: AssetImage("assets/default_user.png"),
                           fit: BoxFit.cover,
                         ),
-                        color: Colors.green),
+                        color: MyApp.getModeColor(context)),
                   ),
                 ),
               ],
@@ -132,14 +123,4 @@ class _ProfilePageState extends State<ProfilePage> {
     print(isUserConnected);
     return !isUserConnected ? LoginPage() : _profileView();
   }
-
-//  getCurrentUser() {
-//    var current = AuthService().getUser();
-//    print("user : $current");
-//    setState(() {
-//      _users = current;
-//    });
-//          return current;
-//  }
-
 }
