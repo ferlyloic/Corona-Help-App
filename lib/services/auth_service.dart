@@ -41,14 +41,9 @@ class AuthService {
   getUser() {
     return _currentUser;
   }
-
-//
-//  // wrappinhg the firebase calls
-//  Future logout() {
-//    _currentUser = null;
-//    notifyListeners();
-//    return _currentUser;
-//  }
+  void logout() {
+    _auth.signOut();
+  }
 //
 //  // wrapping the firebase calls
 //  Future createUser(
