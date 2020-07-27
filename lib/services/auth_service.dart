@@ -7,32 +7,35 @@ class AuthService {
   User _currentUser;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   Future<User> anonymSign() async {
-    try{
+    try {
       AuthResult result = await _auth.signInAnonymously();
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
 
       return _userFromFirebaseUser(firebaseUser);
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
   }
-  
-Stream<User> get user {
+
+  Stream<User> get user {
     return _auth.onAuthStateChanged
 //        .map((FirebaseUser firebaseUser) => _userFromFirebaseUser(user));
         .map(_userFromFirebaseUser);
-}
+  }
+
 //
 //  AuthService() {
 //    print("new instance of AuthService");
 //  }
 //
-   getUser() {
+  getUser() {
     return _currentUser;
   }
+
 //
 //  // wrappinhg the firebase calls
 //  Future logout() {
@@ -54,6 +57,6 @@ Stream<User> get user {
   }
 
   User _userFromFirebaseUser(FirebaseUser firebaseUser) {
-    _currentUser = firebaseUser != null ? User(firebaseUser.uid): null;
+    _currentUser = firebaseUser != null ? User(firebaseUser.uid) : null;
   }
 }
