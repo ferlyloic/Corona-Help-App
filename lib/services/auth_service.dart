@@ -54,7 +54,16 @@ class AuthService {
 //        String password}) async {}
 //
 //  // logs in the user if password matches
-  Future loginUser({String email, String password}) {
-//    TODO: implement the login logic.
+  Future<User> SignInWithEmailAndPassword({String email, String password}) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      print(result.toString());
+      FirebaseUser firebaseUser = result.user;
+      print(firebaseUser.uid);
+      return _userFromFirebaseUser(firebaseUser);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }
