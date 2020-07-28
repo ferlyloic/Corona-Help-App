@@ -13,7 +13,7 @@ class RegisterViewState extends State<RegisterView>{
   String _password;
   String _email;
 
-  bool _autovalidate = false;
+  bool _autovalidate = true;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +64,7 @@ class RegisterViewState extends State<RegisterView>{
                 onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Repeat password")),
+            SizedBox(height: 20.0),
             RaisedButton(
                 color: MyApp.defaultPrimaryColor,
                 child: Text(
