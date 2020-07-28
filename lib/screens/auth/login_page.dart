@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/screens/auth/register_page.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class LoginPageState extends State<LoginPage> {
                 onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Password")),
+
             RaisedButton(
                 color: MyApp.defaultPrimaryColor,
                 child: Text(
@@ -61,6 +63,20 @@ class LoginPageState extends State<LoginPage> {
 ////                    TODO: implement an error response here.
 //                    print("Result: no user returned");
 //                  }
+                }),
+            FlatButton(
+                child: Text(
+                  "Register",
+                  style: TextStyle(
+                      color: MyApp.defaultPrimaryColor
+                  ),
+                ),
+                onPressed: () async {
+                  print("load RegisterView");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterView()),
+                  );
                 }),
           ],
         ),
