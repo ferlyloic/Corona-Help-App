@@ -1,4 +1,5 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
@@ -7,12 +8,13 @@ class RegisterView extends StatefulWidget {
 }
 
 class RegisterViewState extends State<RegisterView> {
+  final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   String _username;
   String _password;
   String _email;
 
-  bool _autovalidate = true;
+  bool _autoValidate = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class RegisterViewState extends State<RegisterView> {
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
-        autovalidate: _autovalidate,
+        autovalidate: _autoValidate,
         child: Column(
           children: <Widget>[
             SizedBox(height: 20.0),
@@ -75,8 +77,13 @@ class RegisterViewState extends State<RegisterView> {
                 ),
                 onPressed: () async {
                   print("register pressed");
-                  print(_email);
-                  print(_password);
+                  if(_formKey.currentState.validate()) {
+                    print(_email);
+                    print(_password);
+                    print(_username );
+                  }else{
+                    print("fields are not valid");
+                  }
 
 //                  User user = await _authService.anonymSign();
 //                  if (user != null) {
