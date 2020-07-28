@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
+import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
@@ -45,10 +46,11 @@ class RegisterViewState extends State<RegisterView> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (String arg) {
-                  if (arg.length < 4)
-                    return 'Name must be more than 4 charater';
-                  else
-                    return null;
+                  List results = [
+                    ValidationService.minLength(arg, 4),
+                    ValidationService.isEmail(arg)
+                  ];
+                  return ValidationService.multipleValidation(results);
                 },
                 decoration: InputDecoration(labelText: "User name")),
             TextFormField(
