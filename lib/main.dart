@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  static Color defaultPrimaryColor = Colors.amber;
+  static Color defaultPrimaryColor = Colors.orange;
 
   // This widget is the root of your application.
   @override
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
         value: AuthService().user,
         child: MaterialApp(
-          title: 'Corona Help',
+          title: 'Corona Help App',
           theme: ThemeData(
             primarySwatch: defaultPrimaryColor,
             accentColor: defaultPrimaryColor,
