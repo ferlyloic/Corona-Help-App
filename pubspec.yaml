@@ -24,6 +24,7 @@ dependencies:
   cloud_firestore: ^0.13.7
   color:  any
   cupertino_icons: ^0.1.2
+  email_validator: ^1.0.5
   firebase_auth: ^0.16.1
   font_awesome_flutter: ^8.8.1
   dio:  ^3.0.9
