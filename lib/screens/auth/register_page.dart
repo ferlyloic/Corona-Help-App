@@ -18,7 +18,7 @@ class RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    print("building LoginView");
+    print("building RegisterView");
     return Scaffold(
         body: SingleChildScrollView(
             child: Container(
