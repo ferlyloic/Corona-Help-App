@@ -1,13 +1,12 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:flutter/material.dart';
 
-class RegisterView extends StatefulWidget{
+class RegisterView extends StatefulWidget {
   @override
   RegisterViewState createState() => RegisterViewState();
-
 }
 
-class RegisterViewState extends State<RegisterView>{
+class RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   String _username;
   String _password;
@@ -19,8 +18,8 @@ class RegisterViewState extends State<RegisterView>{
   Widget build(BuildContext context) {
     print("building LoginView");
     return Scaffold(
-        body:SingleChildScrollView(
-        child:Container(
+        body: SingleChildScrollView(
+            child: Container(
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
@@ -34,24 +33,24 @@ class RegisterViewState extends State<RegisterView>{
             ),
             SizedBox(height: 20.0),
             TextFormField(
-                onChanged: (value)  {
+                onChanged: (value) {
                   _username = value;
 //                  print(value);
                 },
-                onSaved: (value)  {
+                onSaved: (value) {
                   _username = value;
 //                  print(value);
                 },
                 keyboardType: TextInputType.text,
                 validator: (String arg) {
-                  if(arg.length < 4)
+                  if (arg.length < 4)
                     return 'Name must be more than 4 charater';
                   else
                     return null;
                 },
                 decoration: InputDecoration(labelText: "User name")),
             TextFormField(
-                onChanged: (value)  {
+                onChanged: (value) {
                   _email = value;
 //                  print(value);
                 },
@@ -72,7 +71,7 @@ class RegisterViewState extends State<RegisterView>{
                   "Register",
                   style: TextStyle(
                       color:
-                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                          MyApp.isDark(context) ? Colors.black : Colors.white),
                 ),
                 onPressed: () async {
                   print("register pressed");
@@ -90,7 +89,6 @@ class RegisterViewState extends State<RegisterView>{
           ],
         ),
       ),
-    )
-    ));
+    )));
   }
 }
