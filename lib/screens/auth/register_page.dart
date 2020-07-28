@@ -19,7 +19,8 @@ class RegisterViewState extends State<RegisterView>{
   Widget build(BuildContext context) {
     print("building LoginView");
     return Scaffold(
-        body:Container(
+        body:SingleChildScrollView(
+        child:Container(
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
@@ -90,6 +91,6 @@ class RegisterViewState extends State<RegisterView>{
         ),
       ),
     )
-    );
+    ));
   }
 }
