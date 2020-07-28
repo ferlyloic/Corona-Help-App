@@ -31,11 +31,14 @@ class LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20.0),
             TextFormField(
-                onSaved: (value) => _email = value,
+              onChanged: (value)  {
+                _email = value;
+                print(value);
+              },
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(labelText: "Email Address")),
             TextFormField(
-                onSaved: (value) => _password = value,
+                onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Password")),
             RaisedButton(
@@ -48,13 +51,16 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 onPressed: () async {
                   print("login pressed");
-                  User user = await _authService.anonymSign();
-                  if (user != null) {
-                    print("Result: ${user.uid}");
-                  } else {
-//                    TODO: implement an error response here.
-                    print("Result: no user returned");
-                  }
+                  print(_email);
+                  print(_password);
+
+//                  User user = await _authService.anonymSign();
+//                  if (user != null) {
+//                    print("Result: ${user.uid}");
+//                  } else {
+////                    TODO: implement an error response here.
+//                    print("Result: no user returned");
+//                  }
                 }),
           ],
         ),
