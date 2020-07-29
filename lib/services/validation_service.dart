@@ -1,26 +1,47 @@
 import 'package:email_validator/email_validator.dart';
 
 class ValidationService {
-  static String minLength(String text, int minLength) {
-    if (minLength < 0) throw Exception();
-    return text.length < minLength
-        ? 'This field must be more than $minLength charater${minLength < 2 ? '' : 's'}.'
-        : null;
+  String textToValidate;
+  String _errorResult;
+  String fieldName;
+  ValidationService(String textToValidate,{this.fieldName = 'This field'}){
+    this.textToValidate = textToValidate;
+
   }
-  static String maxLength(String text, int maxLength) {
-    if (maxLength < 0) throw Exception();
-    return text.length > maxLength
-        ? 'This field cannot be more than $maxLength charater${maxLength < 2 ? '' : 's'}.'
-        : null;
-  }
-  static String isEmail(String text) {
-    return EmailValidator.validate(text)? null:
-        'This field must be a correct email address';
-  }
-  static String multipleValidation(List<String> validationResultList) {
-    for (String result in validationResultList){
-      if (result != null) return result;
+//  check if the text to validate is not empty.
+  bool isNotNull() {
+    if(this.textToValidate == null){
+      _errorResult = '$fieldName cannot be empty.';
+      return false;
     }
-    return null;
+    return true;
+  }
+
+  void minLength(int minLength) {
+    if (isNotNull() && _errorResult == null) {
+      if (minLength < 0) throw Exception();
+      _errorResult = textToValidate.length < minLength
+          ? '$fieldName must be more than $minLength character${minLength < 2 ? '' : 's'}.'
+          : null;
+    }
+  }
+
+  void maxLength(int maxLength) {
+    if (isNotNull() && _errorResult == null) {
+      if (maxLength < 0) throw Exception();
+      _errorResult = textToValidate.length > maxLength
+          ? '$fieldName cannot be more than $maxLength character${maxLength < 2 ? '' : 's'}.'
+          : null;
+    }
+  }
+
+  void isEmail() {
+    if (isNotNull() && _errorResult == null) {
+      _errorResult = EmailValidator.validate(textToValidate)? null:
+        '$fieldName must be an correct email address';
+    }
+  }
+   String errorResult() {
+    return _errorResult;
   }
 }
