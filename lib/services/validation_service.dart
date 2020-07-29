@@ -41,6 +41,16 @@ class ValidationService {
         '$fieldName must be an correct email address';
     }
   }
+  void validateStructure(){
+    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+    _errorResult = regExp.hasMatch(textToValidate) ? null: "the password must have "
+        "at least 1 uppercase"
+        ", 1 lowercase"
+        ", 1 Numeric Number"
+        ", 1 Special Character."
+        " Common Allow Character ( ! @ # \$ & * ~ )";
+  }
    String errorResult() {
     return _errorResult;
   }
