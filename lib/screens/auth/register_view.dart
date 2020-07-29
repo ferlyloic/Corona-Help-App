@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,15 @@ class RegisterViewState extends State<RegisterView> {
 
   bool _autoValidate = false;
 
+  bool _onLoading = false;
 
 
   @override
   Widget build(BuildContext context) {
     print("building RegisterView");
-    return Scaffold(
+    return _onLoading
+        ? Loading()
+        :Scaffold(
         body: SingleChildScrollView(
             child: Container(
       padding: EdgeInsets.all(20.0),
@@ -109,6 +113,9 @@ class RegisterViewState extends State<RegisterView> {
                 onPressed: () async {
                   print("register pressed");
                   if(_formKey.currentState.validate()) {
+                    setState(() {
+                      _onLoading = true;
+                    });
                     print(_email);
                     print(_password);
                     print(_username );
@@ -117,11 +124,15 @@ class RegisterViewState extends State<RegisterView> {
                       print("Result: ${user.uid}");
                     } on PlatformException catch ( e) {
                       setState(() {
+                        _onLoading = false;
                         _errorMessage = e.message;
                         print(_errorMessage);
                       });
                     } catch ( e) {
-                      _errorMessage = 'fails to register. pleas try again later.';
+                      setState(() {
+                        _onLoading = false;
+                        _errorMessage = 'fails to register. pleas try again later.';
+                      });
                       print(e.toString());
                     }
 

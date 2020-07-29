@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,13 +20,16 @@ class SignInViewState extends State<SignInView> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
+  bool _onLoading =false;
 
   String _errorMessage;
 
   @override
   Widget build(BuildContext context) {
     print("entering method loginView");
-    return SingleChildScrollView(
+    return _onLoading
+        ? Loading()
+        : SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
@@ -70,7 +74,11 @@ class SignInViewState extends State<SignInView> {
                           MyApp.isDark(context) ? Colors.black : Colors.white),
                 ),
                 onPressed: () async {
-                  print("login pressed");   if(_formKey.currentState.validate()) {
+                  print("login pressed");
+                  if(_formKey.currentState.validate()) {
+                    setState(() {
+                      _onLoading = true;
+                    });
                     print(_email);
                     print(_password);
                     try{
@@ -78,14 +86,18 @@ class SignInViewState extends State<SignInView> {
                       print("Result: ${user.uid}");
                     } on PlatformException catch ( e) {
                       setState(() {
+                        _onLoading = false;
                         _errorMessage = e.message;
                         print(_errorMessage);
                       });
                     } catch ( e) {
-                      _errorMessage = 'fails to register. pleas try again later.';
+                      setState(() {
+                        _onLoading = false;
+                        _errorMessage = 'fails to login. pleas try again later.';
+                      });
+
                       print(e.toString());
                     }
-
                   }else{
                     print("fields are not valid");
                   }
