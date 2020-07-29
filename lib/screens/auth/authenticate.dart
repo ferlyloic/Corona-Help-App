@@ -1,3 +1,5 @@
+import 'package:coronahelpapp/screens/auth/login_page.dart';
+import 'package:coronahelpapp/screens/auth/register_page.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -6,10 +8,19 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+
+  bool isLoginView = true;
+  /// toggle between login and register views.
+  void toggleView(){
+    setState(() {
+      isLoginView = !isLoginView;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Authenticate'),
+      child: isLoginView ? LoginPage(toggleView: toggleView) : RegisterView(toggleView: toggleView),
     );
   }
 }

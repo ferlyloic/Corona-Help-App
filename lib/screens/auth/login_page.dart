@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  final Function toggleView;
+
+  const LoginPage({Key key, this.toggleView}) : super(key: key);
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -42,7 +45,7 @@ class LoginPageState extends State<LoginPage> {
                 onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Password")),
-
+            SizedBox(height: 20,),
             RaisedButton(
                 color: MyApp.defaultPrimaryColor,
                 child: Text(
@@ -73,10 +76,11 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 onPressed: () async {
                   print("load RegisterView");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterView()),
-                  );
+                  widget.toggleView();
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => RegisterView()),
+//                  );
                 }),
           ],
         ),

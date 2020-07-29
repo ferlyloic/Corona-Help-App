@@ -4,6 +4,9 @@ import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
+  final Function toggleView;
+
+  const RegisterView({Key key, this.toggleView}) : super(key: key);
   @override
   RegisterViewState createState() => RegisterViewState();
 }
@@ -46,11 +49,10 @@ class RegisterViewState extends State<RegisterView> {
                 },
                 keyboardType: TextInputType.text,
                 validator: (String arg) {
-                  List results = [
-                    ValidationService.minLength(arg, 4),
-                    ValidationService.isEmail(arg)
-                  ];
-                  return ValidationService.multipleValidation(results);
+                  ValidationService val = ValidationService(arg);
+                  val.minLength(4);
+                  val.isEmail();
+                  return val.errorResult();
                 },
                 decoration: InputDecoration(labelText: "User name")),
             TextFormField(
@@ -94,6 +96,17 @@ class RegisterViewState extends State<RegisterView> {
 ////                    TODO: implement an error response here.
 //                    print("Result: no user returned");
 //                  }
+                }),
+            FlatButton(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(
+                      color: MyApp.defaultPrimaryColor
+                  ),
+                ),
+                onPressed: () async {
+                  print(" Registering canceled");
+                  widget.toggleView();
                 }),
           ],
         ),
