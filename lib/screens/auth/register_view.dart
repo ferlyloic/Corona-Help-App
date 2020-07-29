@@ -1,7 +1,9 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterView extends StatefulWidget {
   final Function toggleView;
@@ -17,8 +19,12 @@ class RegisterViewState extends State<RegisterView> {
   String _username;
   String _password;
   String _email;
+  String _errorMessage;
+  String _confirmPassword;
 
   bool _autoValidate = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +62,42 @@ class RegisterViewState extends State<RegisterView> {
                 },
                 decoration: InputDecoration(labelText: "User name")),
             TextFormField(
-                onChanged: (value) {
-                  _email = value;
+              onChanged: (value) {
+                _email = value;
 //                  print(value);
-                },
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "Email Address")),
+              },
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(labelText: "Email Address"),
+              validator: (String arg) {
+                ValidationService val = ValidationService(arg);
+                val.isEmail();
+                return val.errorResult();
+              },
+            ),
             TextFormField(
                 onChanged: (value) => _password = value,
                 obscureText: true,
-                decoration: InputDecoration(labelText: "Password")),
+                decoration: InputDecoration(labelText: "Password"),
+                validator: (String arg) {
+                  ValidationService val = ValidationService(arg);
+                  val.isStrongPassword();
+                  if (val.errorResult() != null) return val.errorResult();
+                  if(_password != _confirmPassword) return "the given passwords don't match.";
+                  return null;
+                  },),
             TextFormField(
-                onChanged: (value) => _password = value,
-                obscureText: true,
-                decoration: InputDecoration(labelText: "Repeat password")),
+              onChanged: (value) => _confirmPassword = value,
+              obscureText: true,
+              decoration: InputDecoration(labelText: "Confirm password"),
+              validator: (String arg) {
+                if(_password==null) return null;
+                ValidationService val = ValidationService(arg);
+                val.isStrongPassword();
+                return val.errorResult();
+              },
+            ),
             SizedBox(height: 20.0),
+            _getErrorTextWidget(),
             RaisedButton(
                 color: MyApp.defaultPrimaryColor,
                 child: Text(
@@ -85,17 +112,24 @@ class RegisterViewState extends State<RegisterView> {
                     print(_email);
                     print(_password);
                     print(_username );
+                    try{
+                      User user = await _authService.registerWithEmailAndPassword(email: _email,password: _password);
+                      print("Result: ${user.uid}");
+                    } on PlatformException catch ( e) {
+                      setState(() {
+                        _errorMessage = e.message;
+                        print(_errorMessage);
+                      });
+                    } catch ( e) {
+                      _errorMessage = 'fails to register. pleas try again later.';
+                      print(e.toString());
+                    }
+
                   }else{
                     print("fields are not valid");
                   }
 
-//                  User user = await _authService.anonymSign();
-//                  if (user != null) {
-//                    print("Result: ${user.uid}");
-//                  } else {
-////                    TODO: implement an error response here.
-//                    print("Result: no user returned");
-//                  }
+
                 }),
             FlatButton(
                 child: Text(
@@ -112,5 +146,11 @@ class RegisterViewState extends State<RegisterView> {
         ),
       ),
     )));
+  }
+
+  _getErrorTextWidget() {
+    return _errorMessage == null
+        ? Container()
+        : Stack(children: [Text(_errorMessage,style: TextStyle(color: Colors.red, fontSize: 14.0),), SizedBox(height: 20)]);
   }
 }
