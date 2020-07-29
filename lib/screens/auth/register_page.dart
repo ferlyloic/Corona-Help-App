@@ -51,7 +51,7 @@ class RegisterViewState extends State<RegisterView> {
                 validator: (String arg) {
                   ValidationService val = ValidationService(arg);
                   val.minLength(4);
-                  val.isEmail();
+                  val.hasNoWhiteSpaces();
                   return val.errorResult();
                 },
                 decoration: InputDecoration(labelText: "User name")),
