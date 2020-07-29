@@ -29,14 +29,13 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Container(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Stack(
-              children: <Widget>[
-                CustomBarWidget(),
-                Container(
-                  child: Text(user != null ? user.toString() : "no user logged in"),
-                ),
-              ],
-            )));
+            child: Column(children: <Widget>[
+              CustomBarWidget(),
+              Container(
+                child:
+                    Text(user != null ? user.toString() : "no user logged in"),
+              ),
+            ])));
   }
 
   @override
