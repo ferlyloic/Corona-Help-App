@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:coronahelpapp/services/auth_service.dart';
-import 'package:coronahelpapp/screens/auth/login_page.dart';
+import 'package:coronahelpapp/screens/auth/signin_view.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String titleString = "Profil";
@@ -127,6 +127,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _getLoginOrProfile() {
     print(isUserConnected);
-    return !isUserConnected ? Authenticate() : _profileView();
+    return !isUserConnected ? AuthenticateView() : _profileView();
   }
 }

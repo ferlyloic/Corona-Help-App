@@ -1,20 +1,20 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
-import 'package:coronahelpapp/screens/auth/register_page.dart';
+import 'package:coronahelpapp/screens/auth/register_view.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class SignInView extends StatefulWidget {
   final Function toggleView;
 
-  const LoginPage({Key key, this.toggleView}) : super(key: key);
+  const SignInView({Key key, this.toggleView}) : super(key: key);
   @override
-  LoginPageState createState() => LoginPageState();
+  SignInViewState createState() => SignInViewState();
 }
 
-class LoginPageState extends State<LoginPage> {
+class SignInViewState extends State<SignInView> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   String _password;
