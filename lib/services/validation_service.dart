@@ -43,24 +43,27 @@ class ValidationService {
   }
 
   void isStrongPassword(){
+    String pwd = 'the password must have';
     if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[A-Z])', 'at least 1 uppercase');
+    validateStructure(r'(?=.*?[A-Z])', '$pwd at least 1 uppercase.');
     if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[a-z])', 'at least 1 lowercase');
+    validateStructure(r'(?=.*?[a-z])', '$pwd at least 1 lowercase.');
     if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[0-9])', 'at least 1 numeric');
+    validateStructure(r'(?=.*?[0-9])', '$pwd at least 1 numeric.');
     if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[!@#\$&*~])', 'at least 1 special Character like ( ! @ # \$ & * ~ ');
+    validateStructure(r'(?=.*?[!@#\$&*~])', '$pwd  at least 1 special Character like ( ! @ # \$ & * ~ \')');
     if(_errorResult!=null) return;
   }
   /// validate if the text match the given [pattern] and set the error message with the corresponding [errorText].
   void validateStructure(String pattern, String errorText){
 //    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regExp = RegExp(pattern);
-    _errorResult = regExp.hasMatch(textToValidate) ? null: 'the password must have $errorText.';
+    _errorResult = regExp.hasMatch(textToValidate) ? null: errorText;
   }
-  void hasMinUppercase(){
-
+  void hasNoWhiteSpaces(){
+    if(_errorResult!=null) return;
+    RegExp regExp = RegExp(r'(?=.*[-\s])');
+    _errorResult = !regExp.hasMatch(textToValidate) ? null: 'No whitespaces allowed.';
   }
    String errorResult() {
     return _errorResult;
