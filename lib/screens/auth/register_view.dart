@@ -137,7 +137,8 @@ class RegisterViewState extends State<RegisterView> {
                     }
 
                   }else{
-                    print("fields are not valid");
+                    if(_errorMessage != null) setState(() => _errorMessage = null);
+                    print("at least 1 field is not valid");
                   }
 
 
