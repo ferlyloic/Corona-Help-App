@@ -1,10 +1,10 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
-import 'package:coronahelpapp/screens/auth/register_view.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignInView extends StatefulWidget {
   final Function toggleView;
@@ -19,6 +19,8 @@ class SignInViewState extends State<SignInView> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _email;
+
+  String _errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +53,14 @@ class SignInViewState extends State<SignInView> {
               validator: (arg) {
                 ValidationService val = ValidationService(arg);
                 val.isNotNull();
+                print(val.errorResult());
                 return val.errorResult();
               },
                 onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Password")),
             SizedBox(height: 20,),
+            _getErrorTextWidget(),
             RaisedButton(
                 color: MyApp.defaultPrimaryColor,
                 child: Text(
@@ -66,9 +70,22 @@ class SignInViewState extends State<SignInView> {
                           MyApp.isDark(context) ? Colors.black : Colors.white),
                 ),
                 onPressed: () async {
-                  print("login pressed");if(_formKey.currentState.validate()) {
+                  print("login pressed");   if(_formKey.currentState.validate()) {
                     print(_email);
                     print(_password);
+                    try{
+                      User user = await _authService.signInWithEmailAndPassword(email: _email,password: _password);
+                      print("Result: ${user.uid}");
+                    } on PlatformException catch ( e) {
+                      setState(() {
+                        _errorMessage = e.message;
+                        print(_errorMessage);
+                      });
+                    } catch ( e) {
+                      _errorMessage = 'fails to register. pleas try again later.';
+                      print(e.toString());
+                    }
+
                   }else{
                     print("fields are not valid");
                   }
@@ -100,5 +117,10 @@ class SignInViewState extends State<SignInView> {
         ),
       ),
     );
+  }
+  _getErrorTextWidget() {
+    return _errorMessage == null
+        ? Container()
+        : Stack(children: [Text(_errorMessage,style: TextStyle(color: Colors.red, fontSize: 14.0),), SizedBox(height: 20)]);
   }
 }
