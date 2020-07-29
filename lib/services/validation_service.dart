@@ -14,6 +14,10 @@ class ValidationService {
       _errorResult = '$fieldName cannot be empty.';
       return false;
     }
+    if(this.textToValidate.isEmpty){
+      _errorResult = '$fieldName cannot be empty.';
+      return false;
+    }
     return true;
   }
 
@@ -43,16 +47,20 @@ class ValidationService {
   }
 
   void isStrongPassword(){
-    String pwd = 'the password must have';
-    if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[A-Z])', '$pwd at least 1 uppercase.');
-    if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[a-z])', '$pwd at least 1 lowercase.');
-    if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[0-9])', '$pwd at least 1 numeric.');
-    if(_errorResult!=null) return;
-    validateStructure(r'(?=.*?[!@#\$&*~])', '$pwd  at least 1 special Character like ( ! @ # \$ & * ~ \')');
-    if(_errorResult!=null) return;
+    if (isNotNull() && _errorResult == null) {
+      minLength(8);
+//      String pwd = 'the password must have';
+//      if (_errorResult != null) return;
+//      validateStructure(r'(?=.*?[A-Z])', '$pwd at least 1 uppercase.');
+//      if (_errorResult != null) return;
+//      validateStructure(r'(?=.*?[a-z])', '$pwd at least 1 lowercase.');
+//      if (_errorResult != null) return;
+//      validateStructure(r'(?=.*?[0-9])', '$pwd at least 1 numeric.');
+//      if (_errorResult != null) return;
+//      validateStructure(r'(?=.*?[!@#\$&*~])',
+//          '$pwd  at least 1 special Character like ( ! @ # \$ & * ~ \')');
+//      if (_errorResult != null) return;
+    }
   }
   /// validate if the text match the given [pattern] and set the error message with the corresponding [errorText].
   void validateStructure(String pattern, String errorText){
