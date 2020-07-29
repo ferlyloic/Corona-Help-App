@@ -50,8 +50,7 @@ class LoginPageState extends State<LoginPage> {
             TextFormField(
               validator: (arg) {
                 ValidationService val = ValidationService(arg);
-                val.minLength(8);
-                val.isStrongPassword();
+                val.isNotNull();
                 return val.errorResult();
               },
                 onChanged: (value) => _password = value,
