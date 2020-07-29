@@ -51,7 +51,7 @@ class LoginPageState extends State<LoginPage> {
               validator: (arg) {
                 ValidationService val = ValidationService(arg);
                 val.minLength(8);
-                val.validateStructure();
+                val.isStrongPassword();
                 return val.errorResult();
               },
                 onChanged: (value) => _password = value,

@@ -38,18 +38,29 @@ class ValidationService {
   void isEmail() {
     if (isNotNull() && _errorResult == null) {
       _errorResult = EmailValidator.validate(textToValidate)? null:
-        '$fieldName must be an correct email address';
+        '$fieldName must be an correct email address.';
     }
   }
-  void validateStructure(){
-    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-    RegExp regExp = new RegExp(pattern);
-    _errorResult = regExp.hasMatch(textToValidate) ? null: "the password must have "
-        "at least 1 uppercase"
-        ", 1 lowercase"
-        ", 1 Numeric Number"
-        ", 1 Special Character."
-        " Common Allow Character ( ! @ # \$ & * ~ )";
+
+  void isStrongPassword(){
+    if(_errorResult!=null) return;
+    validateStructure(r'(?=.*?[A-Z])', 'at least 1 uppercase');
+    if(_errorResult!=null) return;
+    validateStructure(r'(?=.*?[a-z])', 'at least 1 lowercase');
+    if(_errorResult!=null) return;
+    validateStructure(r'(?=.*?[0-9])', 'at least 1 numeric');
+    if(_errorResult!=null) return;
+    validateStructure(r'(?=.*?[!@#\$&*~])', 'at least 1 special Character like ( ! @ # \$ & * ~ ');
+    if(_errorResult!=null) return;
+  }
+  /// validate if the text match the given [pattern] and set the error message with the corresponding [errorText].
+  void validateStructure(String pattern, String errorText){
+//    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = RegExp(pattern);
+    _errorResult = regExp.hasMatch(textToValidate) ? null: 'the password must have $errorText.';
+  }
+  void hasMinUppercase(){
+
   }
    String errorResult() {
     return _errorResult;
