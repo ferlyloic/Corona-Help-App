@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -126,6 +127,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _getLoginOrProfile() {
     print(isUserConnected);
-    return !isUserConnected ? LoginPage() : _profileView();
+    return !isUserConnected ? Authenticate() : _profileView();
   }
 }
