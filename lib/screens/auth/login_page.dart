@@ -2,6 +2,7 @@ import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/auth/register_page.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
+import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     print("entering method loginView");
-    return Container(
+    return SingleChildScrollView(
       padding: EdgeInsets.all(20.0),
       child: Form(
         key: _formKey,
@@ -35,6 +36,11 @@ class LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20.0),
             TextFormField(
+              validator: (arg){
+                ValidationService val = ValidationService(arg);
+                val.isEmail();
+                return val.errorResult();
+              },
               onChanged: (value)  {
                 _email = value;
                 print(value);
@@ -42,6 +48,11 @@ class LoginPageState extends State<LoginPage> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(labelText: "Email Address")),
             TextFormField(
+              validator: (arg) {
+                ValidationService val = ValidationService(arg);
+                val.minLength(8);
+                return val.errorResult();
+              },
                 onChanged: (value) => _password = value,
                 obscureText: true,
                 decoration: InputDecoration(labelText: "Password")),
@@ -55,9 +66,12 @@ class LoginPageState extends State<LoginPage> {
                           MyApp.isDark(context) ? Colors.black : Colors.white),
                 ),
                 onPressed: () async {
-                  print("login pressed");
-                  print(_email);
-                  print(_password);
+                  print("login pressed");if(_formKey.currentState.validate()) {
+                    print(_email);
+                    print(_password);
+                  }else{
+                    print("fields are not valid");
+                  }
 
 //                  User user = await _authService.anonymSign();
 //                  if (user != null) {
