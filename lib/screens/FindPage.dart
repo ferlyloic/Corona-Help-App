@@ -61,6 +61,7 @@ class _FindPageState extends State<FindPage> {
                 itemCount: _users.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
+                    color: MyApp.getModeColor(context),
                     child: Column(
                       children: <Widget>[
                         ListTile(
