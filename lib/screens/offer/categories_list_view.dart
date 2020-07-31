@@ -45,8 +45,8 @@ class CategoryWidget extends StatelessWidget {
                         radius: 30,
                         backgroundImage: AssetImage("assets/default.png")),
                     title: Text(this.category.name),
-                    subtitle: Text(this.category.name),
-                    trailing: Text(this.category.name),
+                    subtitle: Text(''),
+                    trailing: Text(''),
                   )
                 ],
               ),
