@@ -1,7 +1,8 @@
+import 'package:coronahelpapp/models/default_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class User {
+class User extends DefaultModel{
   String username;
   String firstName;
   String lastName;
@@ -38,5 +39,11 @@ class User {
 
   getBackgroundImage() {
     return AssetImage("assets/default.png");
+  }
+
+  @override
+  Map<String,dynamic > toMap() {
+    // TODO: implement toMap
+    throw UnimplementedError();
   }
 }
