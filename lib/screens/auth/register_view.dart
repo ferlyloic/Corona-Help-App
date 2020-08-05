@@ -1,5 +1,6 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/models/user_role.dart';
 import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
@@ -27,6 +28,12 @@ class RegisterViewState extends State<RegisterView> {
 
   bool _onLoading = false;
 
+  String _firstname;
+
+  String _lastname;
+
+  UserRole _userRole;
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,76 @@ class RegisterViewState extends State<RegisterView> {
             ),
             SizedBox(height: 20.0),
             TextFormField(
+                onChanged: (value) {
+                  _firstname = value;
+//                  print(value);
+                },
+                onSaved: (value) {
+                  _firstname = value;
+//                  print(value);
+                },
+                keyboardType: TextInputType.text,
+                validator: (String arg) {
+                  ValidationService val = ValidationService(arg);
+                  val.minLength(4);
+                  val.hasNoWhiteSpaces();
+                  return val.errorResult();
+                },
+                decoration: InputDecoration(labelText: "First name")),
+            SizedBox(height: 20.0),
+            TextFormField(
+                onChanged: (value) {
+                  _lastname = value;
+//                  print(value);
+                },
+                onSaved: (value) {
+                  _lastname = value;
+//                  print(value);
+                },
+                keyboardType: TextInputType.text,
+                validator: (String arg) {
+                  ValidationService val = ValidationService(arg);
+                  val.minLength(4);
+                  val.hasNoWhiteSpaces();
+                  return val.errorResult();
+                },
+                decoration: InputDecoration(labelText: "Last name")),
+            SizedBox(height: 20.0),
+                  DropdownButtonFormField<UserRole>(
+                    validator: (value) => value == null ? 'field required' : null,
+                    hint: Text(
+                        'Rolle auswählen',
+                      style: TextStyle(
+                        color: MyApp.defaultPrimaryColor,
+                      ),
+                    ),
+                    value: _userRole,
+                    icon: Icon(Icons.arrow_drop_down),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: TextStyle(
+//                  color: Colors.deepPurple
+                        ),
+                    onChanged: (UserRole newValue) {
+                      setState(() {
+                        _userRole = newValue;
+                      });
+                      print(_userRole);
+                    },
+                    items: UserRole.values
+                        .map<DropdownMenuItem<UserRole>>((UserRole value) {
+                      return DropdownMenuItem<UserRole>(
+                        value: value,
+                        child: Text(value == UserRole.HelpProvider
+                            ? 'Helfer(in)'
+                            : 'Hilfesuchende(r)',
+                          style: TextStyle(
+                          color: MyApp.defaultPrimaryColor,
+                        ),),
+                      );
+                    }).toList(),
+                  ),
+                  TextFormField(
                 onChanged: (value) {
                   _username = value;
 //                  print(value);
@@ -121,7 +198,11 @@ class RegisterViewState extends State<RegisterView> {
                     print(_username );
                     try{
                       User user = await _authService.registerWithEmailAndPassword(email: _email,password: _password);
-                      print("Result: ${user.uid}");
+                      user.firstName = _firstname;
+                      user.lastName = _lastname;
+                      user.username = _username;
+                      user.role = _userRole;
+                      print("Result: ${user}");
                     } on PlatformException catch ( e) {
                       setState(() {
                         _onLoading = false;
