@@ -1,6 +1,7 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/auth/authenticate.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,18 +79,199 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Container(
 //                        color: Colors.white,
                         child: Center(
-                          child: Stack(
+                          child: ListView(
                             children: <Widget>[
+                              SizedBox( height: 50,),
+                              Table(
+                                children: [
+                                  TableRow(children: [
+                                    Text(
+                                      "Vorname:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.firstName,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Text(
+                                      "Nachname:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.lastName,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Text(
+                                      "User name:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.username,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Text(
+                                      "Email:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.userFromFirebase.email,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Text(
+                                      "Role:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.role==null? 'N/A':_user.role.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Text(
+                                      "Location:",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black),
+                                    ),
+                                    Text(
+                                      _user.location==null? 'N/A':_user.location.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                          color: MyApp.isDark(context)
+                                              ? Colors.white
+                                              : Colors.black45),
+                                    ),
+                                  ]),
+                                ],
+                              ),
+                              SizedBox( height: 10,),
+                            Column(
+                              children: <Widget>[
+                                Text(
+                                  "Beschreibung",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color:
+                                      MyApp.isDark(context)
+                                          ? Colors.white
+                                          : Colors.black
+                                  ),
+                                ),
+                                Text(
+                                  _user.description,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+//                                      fontWeight: FontWeight.bold,
+                                      color:
+                                      MyApp.isDark(context)
+                                          ? Colors.white
+                                          : Colors.black45
+                                  ),
+                                ),
+                              ],
+                            ),
+                              SizedBox( height: 20,),
                               RaisedButton(
                                 color: MyApp.defaultPrimaryColor,
                                 child: Text(
-                                  "Logout",
+                                  "Abmelden",
                                   style: TextStyle(
                                       color:
                                       MyApp.isDark(context) ? Colors.black : Colors.white),
                                 ),
                                 onPressed: () {
                                   print("Logout pressed");
+//                                  sharedPreferences.clear();
+                                  AuthService().logout();
+                                },
+                              ),
+                              RaisedButton(
+                                color: Colors.blue,
+                                child: Text(
+                                  "Bearbeiten",
+                                  style: TextStyle(
+                                      color:
+                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                ),
+                                onPressed: () {
+                                  print("update pressed");
+//                                  sharedPreferences.clear();
+                                  AuthService().logout();
+                                },
+                              ),
+                              RaisedButton(
+                                color: Colors.red,
+                                child: Text(
+                                  "Konto entfernen",
+                                  style: TextStyle(
+                                      color:
+                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                ),
+                                onPressed: () {
+                                  print("delete pressed");
 //                                  sharedPreferences.clear();
                                   AuthService().logout();
                                 },
