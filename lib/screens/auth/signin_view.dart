@@ -83,7 +83,7 @@ class SignInViewState extends State<SignInView> {
                     print(_password);
                     try{
                       User user = await _authService.signInWithEmailAndPassword(email: _email,password: _password);
-                      print("Result: ${user.uid}");
+                      print("Result: ${user}");
                     } on PlatformException catch ( e) {
                       setState(() {
                         _onLoading = false;
