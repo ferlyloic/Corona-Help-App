@@ -1,16 +1,22 @@
 import 'package:coronahelpapp/models/default_model.dart';
+import 'package:coronahelpapp/models/location.dart';
+import 'package:coronahelpapp/models/user_role.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class User extends DefaultModel{
-  String username;
-  String firstName;
-  String lastName;
+
+  String username = 'N/A';
+  String firstName = 'N/A';
+  String lastName = 'N/A';
   DateTime birthDate;
   String imagePath;
-  final String uid;
+  final FirebaseUser userFromFirebase;
+  String description = 'no description.';
+  UserRole role;
+  Location location = Location();
 
-  User(this.uid);
+  User(this.userFromFirebase);
 
   String fullName() {
     return this.firstName + " " + this.lastName;
@@ -23,7 +29,7 @@ class User extends DefaultModel{
   @override
   String toString() {
     // TODO: update toString
-    return this.uid
+    return this.userFromFirebase?.uid
 //        + ": " +
 //        this.firstName
 //        + " " +
@@ -46,4 +52,8 @@ class User extends DefaultModel{
     // TODO: implement toMap
     throw UnimplementedError();
   }
+
+  @override
+
+  String get collectionName => 'users';
 }
