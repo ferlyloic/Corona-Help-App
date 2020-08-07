@@ -1,6 +1,7 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/service.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/models/user_role.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -58,6 +59,16 @@ class _FindPageState extends State<FindPage> {
 
   Widget _buildList() {
     User user = AuthService().getCurrentUser(context);
+    var userServices = Service.all(context);
+    print(userServices);
+    userServices = userServices
+        .where((Service element) =>
+            (user.role == UserRole.HelpProvider
+                ? element.helpProvider
+                : element.helpReceiver) ==
+            user.userFromFirebase.uid)
+        .toList();
+    print(userServices);
     return _usersList?.length != 0
         ? RefreshIndicator(
             child: ListView.builder(
