@@ -134,7 +134,7 @@ class _OfferPageState extends State<OfferPage> {
                               print(_description);
 //                              try{
                                 Service service = Service();
-                                service.category = _category;
+                                service.category = _category.id;
                                 if(user.role == UserRole.HelpProvider) {
                                   service.helpProvider = user;
                                 }else{

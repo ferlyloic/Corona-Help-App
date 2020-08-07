@@ -18,7 +18,7 @@ class AuthService {
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
       print(firebaseUser.uid);
-      return User(firebaseUser);
+      return User(userFromFirebase: firebaseUser);
     } catch (e) {
       print(e.toString());
       return null;
@@ -57,14 +57,14 @@ class AuthService {
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
       print(firebaseUser.uid);
-      return User(firebaseUser);
+      return User(userFromFirebase: firebaseUser);
   }
   /// register the user with corresponding [email] and [password].
   Future<User> registerWithEmailAndPassword({String email, String password}) async {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
-      return User(firebaseUser);
+      return User(userFromFirebase: firebaseUser);
   }
 //  /// delete the user with corresponding [email] and [password].
 //  Future deleteUser(String email, String password) async {
