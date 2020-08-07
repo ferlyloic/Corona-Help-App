@@ -120,6 +120,6 @@ return firebaseUser != null ? User(firebaseUser) : null;
   }
   List<User> _getUsersList(QuerySnapshot snapshot){
     print('Snapshot');
-    return snapshot.documents.map((doc) => User(null).setData(doc.data));
+    return snapshot.documents.map((doc) => User(null).setData(doc.data)).toList();
   }
 }
