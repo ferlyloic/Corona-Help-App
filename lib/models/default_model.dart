@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronahelpapp/models/user.dart';
 
 abstract class DefaultModel{
   CollectionReference collection;
 
 
   String get collectionName;
-  String get id;
+  String id;
 DefaultModel(){
   collection = Firestore.instance.collection(collectionName);
 }
@@ -22,9 +23,15 @@ DefaultModel(){
 //  }
   create() async {
 //    Map<String, dynamic> dataWithCreatedDateTine = {'crated_at': DateTime.now()};
-    data['created_at'] = DateTime.now().toString();
-    print(data);
-    return await collection.document(id).setData(data, merge: true);
+    var currentData = data;
+    currentData['created_at'] = DateTime.now().toString();
+    print(currentData);
+    print(this.id);
+    if(id!=null)
+      return await collection.document(id).setData(currentData, merge: true);
+    return collection.add(currentData).then((value) {
+      id = value.documentID;
+    });
   }
 Stream <QuerySnapshot> get dataFromFireStore {
     return collection.snapshots();
