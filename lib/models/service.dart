@@ -4,11 +4,13 @@ import 'package:coronahelpapp/models/default_model.dart';
 import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/service_status.dart';
 import 'package:coronahelpapp/models/user.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class Service extends DefaultModel {
   String id;
-  User helpProvider;
-  User helpReceiver;
+  String helpProvider;
+  String helpReceiver;
   String category;
   ServiceStatus status;
   String description;
@@ -28,6 +30,7 @@ class Service extends DefaultModel {
       'category':this.category,
       'description':this.description,
       'status':this.status?.toString(),
+      'created_at':this.createdAt,
     };
   }
 
@@ -48,9 +51,20 @@ class Service extends DefaultModel {
       service.helpReceiver = doc.data['help_receiver'];
       service.category = doc.data['category'];
       service.description = doc.data['description'];
-      service.createdAt = doc.data['created_at'];
-
+      service.createdAt = DateTime.tryParse(doc.data['created_at']);
       return service;
     }).toList();
+  }
+
+  static List<Service> all(BuildContext context) {
+    var result = Provider.of<List<Service>>(context);
+    print(result?.length);
+    result?.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    return result;
+  }
+  @override
+  String toString() {
+    // TODO: implement toString
+    return data.toString();
   }
 }
