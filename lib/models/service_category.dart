@@ -13,11 +13,11 @@ class ServiceCategory extends DefaultModel {
   ServiceCategory({this.id, this.name, this.description = ''});
   static List<ServiceCategory> all(BuildContext context){
     var result = Provider.of<List<ServiceCategory>>(context);
-    print(result?.length);
     result?.sort((a, b) => a.name.compareTo(b.name));
     return result;
   }
   Stream<List<ServiceCategory>> get categories {
+    print('stream data');
     return collection.snapshots().map(_getAllCategories);
   }
 //  get id {
