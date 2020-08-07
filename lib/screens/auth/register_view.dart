@@ -1,11 +1,15 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/models/location.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/models/user_role.dart';
+import 'package:coronahelpapp/screens/shared/address_autocompletion.dart';
 import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_webservice/places.dart';
 
 class RegisterView extends StatefulWidget {
   final Function toggleView;
@@ -33,6 +37,10 @@ class RegisterViewState extends State<RegisterView> {
   String _lastname;
 
   UserRole _userRole;
+
+  LocationInfo _location;
+
+  TextEditingController  locationInputFieldController = TextEditingController();
 
 
   @override
@@ -67,8 +75,9 @@ class RegisterViewState extends State<RegisterView> {
                 keyboardType: TextInputType.text,
                 validator: (String arg) {
                   ValidationService val = ValidationService(arg);
-                  val.minLength(4);
-                  val.hasNoWhiteSpaces();
+                  val.minLength(1);
+                  val.minWordCharacterNumber(1);
+//                  val.hasNoWhiteSpaces();
                   return val.errorResult();
                 },
                 decoration: InputDecoration(labelText: "First name")),
@@ -85,8 +94,8 @@ class RegisterViewState extends State<RegisterView> {
                 keyboardType: TextInputType.text,
                 validator: (String arg) {
                   ValidationService val = ValidationService(arg);
-                  val.minLength(4);
-                  val.hasNoWhiteSpaces();
+                  val.minLength(1);
+                  val.minWordCharacterNumber(1);
                   return val.errorResult();
                 },
                 decoration: InputDecoration(labelText: "Last name")),
@@ -96,7 +105,7 @@ class RegisterViewState extends State<RegisterView> {
                     hint: Text(
                         'Rolle auswählen',
                       style: TextStyle(
-                        color: MyApp.defaultPrimaryColor,
+                        color: Colors.grey,
                       ),
                     ),
                     value: _userRole,
@@ -125,6 +134,42 @@ class RegisterViewState extends State<RegisterView> {
                       );
                     }).toList(),
                   ),
+            TextFormField(
+                onChanged: (value) async {
+                  setState(() {
+                    locationInputFieldController.text = '';
+                  });
+                  value = await _getLocation(value);
+                        _lastname = value;
+                  print(value);
+                },
+//                onSaved: (value) {
+//                  _lastname = value;
+////                  print(value);
+//                },
+            controller: locationInputFieldController,
+                onTap: () async {
+                    _location =  LocationInfo();
+                    var p = await _location.getCurrentLocation();
+                    print(_location);
+                    if(p != null)
+                    setState(() {
+                      locationInputFieldController.text =_location.toString();
+                    });
+
+                },
+                keyboardType: TextInputType.text,
+                validator: (String arg) {
+                  ValidationService val = ValidationService(arg);
+                  val.minLength(2);
+                  val.minWordCharacterNumber(2);
+                  return val.errorResult();
+                },
+                decoration: InputDecoration(
+                    labelText: "Location",
+                  suffixIcon: Icon(Icons.location_searching,),
+                )
+            ),
                   TextFormField(
                 onChanged: (value) {
                   _username = value;
@@ -202,6 +247,8 @@ class RegisterViewState extends State<RegisterView> {
                       user.lastName = _lastname;
                       user.username = _username;
                       user.role = _userRole;
+                      user.location = _location;
+                      user.create();
                       print("Result: ${user}");
                     } on PlatformException catch ( e) {
                       setState(() {
@@ -245,5 +292,22 @@ class RegisterViewState extends State<RegisterView> {
     return _errorMessage == null
         ? Container()
         : Stack(children: [Text(_errorMessage,style: TextStyle(color: Colors.red, fontSize: 14.0),), SizedBox(height: 20)]);
+  }
+
+   Future<String> _getLocation(String value) async {
+    Prediction p = await PlacesAutocomplete.show(
+      context: context,
+      apiKey: MyApp.kGoogleApiKey,
+      language: MyApp.apiQueryLanguage,
+      components: [Component(Component.country, MyApp.apiQueryLanguage)],
+      mode: Mode.overlay,
+      startText: value == null? '':value,
+    );
+    setState(() {
+      locationInputFieldController.text = p.description;
+    });
+
+    print(p.description);
+    return p.description;
   }
 }
