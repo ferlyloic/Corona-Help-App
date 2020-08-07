@@ -41,6 +41,7 @@ class Service extends DefaultModel {
   }
 
   Stream<List<Service>> get services {
+    print('stream $collectionName');
     return collection.snapshots().map(_getAllServices);
   }
 
@@ -58,7 +59,6 @@ class Service extends DefaultModel {
 
   static List<Service> all(BuildContext context) {
     var result = Provider.of<List<Service>>(context);
-    print(result?.length);
     result?.sort((a, b) => a.createdAt.compareTo(b.createdAt));
     return result;
   }

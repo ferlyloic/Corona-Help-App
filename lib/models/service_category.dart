@@ -17,7 +17,7 @@ class ServiceCategory extends DefaultModel {
     return result;
   }
   Stream<List<ServiceCategory>> get categories {
-    print('stream data');
+    print('stream $collectionName');
     return collection.snapshots().map(_getAllCategories);
   }
 //  get id {
