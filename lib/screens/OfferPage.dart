@@ -87,7 +87,8 @@ class _OfferPageState extends State<OfferPage> {
                             child: Text(
                                value.name,
                               style: TextStyle(
-                                color: MyApp.defaultPrimaryColor,
+//                                color: MyApp.defaultPrimaryColor,
+                                color: value.color(context),
                               ),
 
                             ),
