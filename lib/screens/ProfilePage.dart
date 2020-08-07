@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:coronahelpapp/services/auth_service.dart';
@@ -41,14 +45,15 @@ class _ProfilePageState extends State<ProfilePage> {
      isUserConnected = _user != null;
     print("isConnected :$isUserConnected");
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            ProfilePage.titleString,
-            style: TextStyle(color: MyApp.getTitleColor(context)),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              ProfilePage.titleString,
+              style: TextStyle(color: MyApp.getTitleColor(context)),
+            ),
           ),
-        ),
-        body: _getLoginOrProfile());
+          body: _getLoginOrProfile(),
+    );
   }
 
   _profileView() {
@@ -95,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.firstName,
+                                      _user.firstName == null ? 'N/A':_user.firstName,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -115,7 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.lastName,
+                                      _user.lastName == null ? 'N/A':_user.lastName,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -135,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.username,
+                                      _user.username == null ? 'N/A':_user.username,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -175,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.role==null? 'N/A':_user.role.toString(),
+                                      _user.role == null? 'N/A':_user.getRole(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
