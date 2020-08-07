@@ -18,7 +18,7 @@ class User extends DefaultModel{
   UserRole role;
   LocationInfo location = LocationInfo();
 
-  User(this.userFromFirebase){
+  User({this.userFromFirebase}){
 //    this.setData(data);
   }
   /// stream user data from firebase into the current user.
@@ -28,7 +28,7 @@ class User extends DefaultModel{
   }
   /// return User from firebase user object [firebaseUser].
   User _userFromFirebaseUser(FirebaseUser firebaseUser)  {
-return firebaseUser != null ? User(firebaseUser) : null;
+return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
   }
 
   String fullName() {
@@ -120,6 +120,6 @@ return firebaseUser != null ? User(firebaseUser) : null;
   }
   List<User> _getUsersList(QuerySnapshot snapshot){
     print('Snapshot');
-    return snapshot.documents.map((doc) => User(null).setData(doc.data)).toList();
+    return snapshot.documents.map((doc) => User().setData(doc.data)).toList();
   }
 }
