@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/services/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,11 +10,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User _currentUser;
 
-  /// return User from firebase user object [firebaseUser].
-  User _userFromFirebaseUser(FirebaseUser firebaseUser) {
-    _currentUser = firebaseUser != null ? User(firebaseUser) : null;
-    return _currentUser;
-  }
+
 
   Future<User> anonymSign() async {
     try {
@@ -21,19 +18,17 @@ class AuthService {
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
       print(firebaseUser.uid);
-      return _userFromFirebaseUser(firebaseUser);
+      return User(firebaseUser);
     } catch (e) {
       print(e.toString());
       return null;
     }
   }
 
-  /// stream user data from firebase into the current user.
-  Stream<User> get user {
-    return _auth.onAuthStateChanged
-//        .map((FirebaseUser firebaseUser) => _userFromFirebaseUser(user));
-        .map(_userFromFirebaseUser);
-  }
+
+
+
+
 
 //
 //  AuthService() {
@@ -41,7 +36,9 @@ class AuthService {
 //  }
 //
   User getCurrentUser(BuildContext context) {
-    return Provider.of<User>(context);
+    User user = Provider.of<User>(context);
+    user?.loadDataFromFireStore(context);
+    return user;
   }
   void logout() {
     _auth.signOut();
@@ -60,14 +57,14 @@ class AuthService {
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
       print(firebaseUser.uid);
-      return _userFromFirebaseUser(firebaseUser);
+      return User(firebaseUser);
   }
   /// register the user with corresponding [email] and [password].
   Future<User> registerWithEmailAndPassword({String email, String password}) async {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
-      return _userFromFirebaseUser(firebaseUser);
+      return User(firebaseUser);
   }
 //  /// delete the user with corresponding [email] and [password].
 //  Future deleteUser(String email, String password) async {
