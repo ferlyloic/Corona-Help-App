@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<User>.value(
-        value: User(null).user,
-        child: StreamProvider<List<ServiceCategory>>.value(
-          value: ServiceCategory().categories,
-          child: StreamProvider<QuerySnapshot>.value(
-            value: User(null).dataFromFireStore,
+    return MultiProvider(
+            providers:[
+              StreamProvider<User>.value(value: User(null).user),
+              StreamProvider<QuerySnapshot>.value(value: User(null).dataFromFireStore),
+              StreamProvider<List<ServiceCategory>>.value(value: ServiceCategory().categories),
+            ],
             child: MaterialApp(
               title: 'Corona Help App',
               theme: ThemeData(
@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
               ),
               home: MyBottomNavigationBar(),
             ),
-          ),
-        ));
+          );
   }
 
   static Color getModeColor(BuildContext context) {
