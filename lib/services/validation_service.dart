@@ -63,15 +63,25 @@ class ValidationService {
     }
   }
   /// validate if the text match the given [pattern] and set the error message with the corresponding [errorText].
-  void validateStructure(String pattern, String errorText){
+  void _validateStructure(String pattern, String errorText){
 //    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regExp = RegExp(pattern);
     _errorResult = regExp.hasMatch(textToValidate) ? null: errorText;
   }
+
   void hasNoWhiteSpaces(){
     if(_errorResult!=null) return;
     RegExp regExp = RegExp(r'(?=.*[-\s])');
     _errorResult = !regExp.hasMatch(textToValidate) ? null: 'No whitespaces allowed.';
+  }
+  void minWordCharacterNumber(int minNumber){
+    if (isNotNull() && _errorResult == null) {
+      if (minNumber < 0) throw Exception();
+      if (_errorResult != null) return;
+      RegExp regExp = RegExp('(?=.*[\\w{$minNumber,}].*)');
+      _errorResult =
+      regExp.hasMatch(textToValidate) ? null : 'each word must have at least $minNumber character${minNumber>1?'s':''}.';
+    }
   }
    String errorResult() {
     return _errorResult;
