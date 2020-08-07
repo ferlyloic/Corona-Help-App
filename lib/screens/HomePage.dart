@@ -134,9 +134,9 @@ class _HomePageState extends State<HomePage> {
           return null;
         },
         errorText: 'Please select one or more option(s)',
-        dataSource: ServiceCategory.all(context).map((e) {
+        dataSource: ServiceCategory.all(context)?.map((e) {
           return {'display': e.name, 'value': e};
-        }).toList(),
+        })?.toList(),
 //                          [
 //                            {
 //                              "display": "Australia",
