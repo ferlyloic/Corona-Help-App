@@ -1,10 +1,13 @@
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/models/service.dart';
+import 'package:coronahelpapp/models/user.dart';
+import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class FindPage extends StatefulWidget {
-  static const String titleString = "Search";
+  static const String titleString = "Liste";
 
   @override
   State<StatefulWidget> createState() {
@@ -13,11 +16,11 @@ class FindPage extends StatefulWidget {
 }
 
 class _FindPageState extends State<FindPage> {
-  List<dynamic> _users = [];
+  List<dynamic> _usersList = [];
   final String apiUrl = "https://randomuser.me/api/?results=10&nat=de";
 
   Future<void> _getData() async {
-    if (_users != null)
+    if (_usersList != null)
       setState(() {
         fetchCategories();
       });
@@ -27,7 +30,7 @@ class _FindPageState extends State<FindPage> {
     print(apiUrl);
     var result = await http.get(apiUrl);
     setState(() {
-      _users = json.decode(result.body)['results'];
+      _usersList = json.decode(result.body)['results'];
     });
   }
 
@@ -54,11 +57,12 @@ class _FindPageState extends State<FindPage> {
   }
 
   Widget _buildList() {
-    return _users?.length != 0
+    User user = AuthService().getCurrentUser(context);
+    return _usersList?.length != 0
         ? RefreshIndicator(
             child: ListView.builder(
                 padding: EdgeInsets.all(8),
-                itemCount: _users.length,
+                itemCount: _usersList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     color: MyApp.getModeColor(context),
@@ -68,10 +72,10 @@ class _FindPageState extends State<FindPage> {
                           leading: CircleAvatar(
                               radius: 30,
                               backgroundImage: NetworkImage(
-                                  _users[index]['picture']['large'])),
-                          title: Text(_name(_users[index])),
-                          subtitle: Text(_location(_users[index])),
-                          trailing: Text(_age(_users[index])),
+                                  _usersList[index]['picture']['large'])),
+                          title: Text(_name(_usersList[index])),
+                          subtitle: Text(_location(_usersList[index])),
+                          trailing: Text(_age(_usersList[index])),
                         )
                       ],
                     ),
