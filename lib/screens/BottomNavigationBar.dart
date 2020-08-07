@@ -19,8 +19,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
   int _selectedIndex = 0;
   static List<Widget> _routes = [
     HomePage(),
-    FindPage(),
     OfferPage(),
+    FindPage(),
     ProfilePage(),
     AddressAutocompletion()
 //    TabbedAppBarSample(),
@@ -53,20 +53,20 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
             title: Text(HomePage.titleString),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text(FindPage.titleString),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.add),
             title: Text(OfferPage.titleString),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            title: Text(FindPage.titleString),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             title: Text(ProfilePage.titleString),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place),
-            title: Text("Test"),
+            icon: Icon(Icons.settings),
+            title: Text("Setting"),
           ),
 //          BottomNavigationBarItem(
 //            icon: Icon(Icons.details),
