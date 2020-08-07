@@ -14,7 +14,7 @@ class FindPage extends StatefulWidget {
 
 class _FindPageState extends State<FindPage> {
   List<dynamic> _users = [];
-  final String apiUrl = "https://randomuser.me/api/?results=10";
+  final String apiUrl = "https://randomuser.me/api/?results=10&nat=de";
 
   Future<void> _getData() async {
     if (_users != null)
@@ -40,7 +40,7 @@ class _FindPageState extends State<FindPage> {
   }
 
   String _location(dynamic user) {
-    return user['location']['country'];
+    return user['location']['city'];
   }
 
   String _age(Map<dynamic, dynamic> user) {
