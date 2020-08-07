@@ -4,13 +4,10 @@ import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/service_status.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/models/user_role.dart';
-import 'package:coronahelpapp/screens/offer/categories_list_view.dart';
-import 'package:coronahelpapp/screens/offer/create_offer_view.dart';
 import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_multiselect/flutter_multiselect.dart';
 
 class OfferPage extends StatefulWidget {
   OfferPage({Key key}) : super(key: key);
@@ -136,9 +133,9 @@ class _OfferPageState extends State<OfferPage> {
                                 Service service = Service();
                                 service.category = _category.id;
                                 if(user.role == UserRole.HelpProvider) {
-                                  service.helpProvider = user;
+                                  service.helpProvider = user.id;
                                 }else{
-                                  service.helpReceiver = user;
+                                  service.helpReceiver = user.id;
                                 }
                                 service.description = _description;
                                 service.status = ServiceStatus.NotStarted;
