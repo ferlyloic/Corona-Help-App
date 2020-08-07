@@ -14,7 +14,7 @@ class CategoriesListWidget extends StatefulWidget {
 }
 class CategoriesListWidgetState extends State<CategoriesListWidget> {
 
-  List<ServiceCategory> categoryList = ServiceCategory.all();
+  List<ServiceCategory> categoryList = [];
 
   @override
   Widget build(BuildContext context) {
