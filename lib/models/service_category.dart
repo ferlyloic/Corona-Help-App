@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/models/default_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ServiceCategory extends DefaultModel {
@@ -12,8 +13,8 @@ class ServiceCategory extends DefaultModel {
   ServiceCategory({this.id, this.name, this.description = ''});
   static List<ServiceCategory> all(BuildContext context){
     var result = Provider.of<List<ServiceCategory>>(context);
-    print(result.length);
-    result.sort((a, b) => a.name.compareTo(b.name));
+    print(result?.length);
+    result?.sort((a, b) => a.name.compareTo(b.name));
     return result;
   }
   Stream<List<ServiceCategory>> get categories {
@@ -57,5 +58,8 @@ class ServiceCategory extends DefaultModel {
       'name': this.name,
       'description': this.description,
     }.toString();
+  }
+  Color color(BuildContext context) {
+    return Colors.primaries.elementAt(all(context).indexOf(this) % Colors.primaries.length);
   }
 }
