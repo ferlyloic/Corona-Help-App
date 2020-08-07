@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/BottomNavigationBar.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
@@ -18,20 +19,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
         value: User(null).user,
-        child: StreamProvider<QuerySnapshot>.value(
-          value: User(null).dataFromFireStore,
-          child: MaterialApp(
-            title: 'Corona Help App',
-            theme: ThemeData(
-              primarySwatch: defaultPrimaryColor,
-              accentColor: defaultPrimaryColor,
+        child: StreamProvider<List<ServiceCategory>>.value(
+          value: ServiceCategory().categories,
+          child: StreamProvider<QuerySnapshot>.value(
+            value: User(null).dataFromFireStore,
+            child: MaterialApp(
+              title: 'Corona Help App',
+              theme: ThemeData(
+                primarySwatch: defaultPrimaryColor,
+                accentColor: defaultPrimaryColor,
+              ),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                primarySwatch: defaultPrimaryColor,
+                accentColor: defaultPrimaryColor,
+              ),
+              home: MyBottomNavigationBar(),
             ),
-            darkTheme: ThemeData(
-              brightness: Brightness.dark,
-              primarySwatch: defaultPrimaryColor,
-              accentColor: defaultPrimaryColor,
-            ),
-            home: MyBottomNavigationBar(),
           ),
         ));
   }
