@@ -14,7 +14,7 @@ import 'package:flutter_multiselect/flutter_multiselect.dart';
 
 class OfferPage extends StatefulWidget {
   OfferPage({Key key}) : super(key: key);
-  static const String titleString = "Beantragen";
+  static const String titleString = "Erstellen";
 
   @override
   State<StatefulWidget> createState() {
