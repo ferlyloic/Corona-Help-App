@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coronahelpapp/models/service.dart';
 import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/BottomNavigationBar.dart';
@@ -19,9 +20,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
             providers:[
-              StreamProvider<User>.value(value: User(null).user),
-              StreamProvider<QuerySnapshot>.value(value: User(null).dataFromFireStore),
+              StreamProvider<User>.value(value: User().user),
+              StreamProvider<QuerySnapshot>.value(value: User().dataFromFireStore),
               StreamProvider<List<ServiceCategory>>.value(value: ServiceCategory().categories),
+              StreamProvider<List<Service>>.value(value: Service().services),
             ],
             child: MaterialApp(
               title: 'Corona Help App',
