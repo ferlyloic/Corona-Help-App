@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
      _user = AuthService().getCurrentUser(context);
-     print(_user);
+     print(_user?.data);
      isUserConnected = _user != null;
     print("isConnected :$isUserConnected");
     return Scaffold(
