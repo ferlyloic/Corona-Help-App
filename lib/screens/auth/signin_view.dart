@@ -105,7 +105,7 @@ class SignInViewState extends State<SignInView> {
 
 //                  User user = await _authService.anonymSign();
 //                  if (user != null) {
-//                    print("Result: ${user.uid}");
+//                    print("Result: ${user.id}");
 //                  } else {
 ////                    TODO: implement an error response here.
 //                    print("Result: no user returned");
