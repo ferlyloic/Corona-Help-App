@@ -62,4 +62,11 @@ class ServiceCategory extends DefaultModel {
   Color color(BuildContext context) {
     return Colors.primaries.elementAt(all(context).indexOf(this) % Colors.primaries.length);
   }
+
+  static ServiceCategory find(String current, BuildContext context) {
+    ServiceCategory result = all(context).firstWhere(
+        (ServiceCategory element) => element.id == current,
+        orElse: () => null);
+    return result;
+  }
 }
