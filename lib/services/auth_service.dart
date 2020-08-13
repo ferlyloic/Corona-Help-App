@@ -56,7 +56,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
-      print(firebaseUser.uid);
+//      print(firebaseUser.uid);
       return User(userFromFirebase: firebaseUser);
   }
   /// register the user with corresponding [email] and [password].
