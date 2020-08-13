@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
             providers:[
               StreamProvider<User>.value(value: User().user),
               StreamProvider<QuerySnapshot>.value(value: User().dataFromFireStore),
+              StreamProvider<List<User>>.value(value: User().users),
               StreamProvider<List<ServiceCategory>>.value(value: ServiceCategory().categories),
               StreamProvider<List<Service>>.value(value: Service().services),
             ],
