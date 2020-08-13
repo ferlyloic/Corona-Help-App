@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/user.dart';
@@ -22,7 +23,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    print(ServiceCategory.all(context));
     final User user = AuthService().getCurrentUser(context);
     return Scaffold(
         appBar: AppBar(
@@ -47,11 +47,11 @@ class _HomePageState extends State<HomePage> {
 
 
   List<dynamic> _users = [];
-  final String apiUrl = "https://randomuser.me/api/?results=100&nat=de";
+  final String apiUrl = "https://randomuser.me/api/?results=10&nat=de";
 
   Future<void> _getData() async {
     if (_users != null)
-      setState(() {
+      setState(() async {
         fetchCategories();
       });
   }
@@ -59,8 +59,17 @@ class _HomePageState extends State<HomePage> {
   void fetchCategories() async {
     print(apiUrl);
     var result = await http.get(apiUrl);
-    setState(() {
+    setState(()  {
       _users = json.decode(result.body)['results'];
+//      _users.sort((a, b) => a[ 'name']['last'].compareTo(b['name']['last']));
+     CollectionReference reference = Firestore.instance.collection('example_users');
+      AuthService _authService = AuthService();
+      for(var user in _users){
+       print(user);
+//       User u = await _authService.registerWithEmailAndPassword(email: user['email'],password: 'qqqqqqqq');
+//       reference.document(user['email']).setData(user);
+     }
+      print(_users?.length);
     });
   }
 
