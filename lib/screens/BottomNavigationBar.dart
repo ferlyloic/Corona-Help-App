@@ -1,6 +1,7 @@
 import 'package:coronahelpapp/screens/HomePage.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/screens/shared/address_autocompletion.dart';
+import 'package:coronahelpapp/screens/shared/storage.dart';
 import 'package:flutter/material.dart';
 import 'CoolListView.dart';
 import 'FindPage.dart';
@@ -22,7 +23,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     OfferPage(),
     FindPage(),
     ProfilePage(),
-    AddressAutocompletion()
+    MyHomePage(),
+//    AddressAutocompletion()
 //    TabbedAppBarSample(),
   ];
 
