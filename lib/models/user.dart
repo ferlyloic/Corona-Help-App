@@ -17,6 +17,7 @@ class User extends DefaultModel{
   String description = 'no description.';
   UserRole role;
   LocationInfo location = LocationInfo();
+  String email;
 
   User({this.userFromFirebase}){
 //    this.setData(data);
@@ -77,7 +78,7 @@ return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
   @override
   // TODO: implement id
   get id {
-    return this.userFromFirebase.uid;
+    return this.userFromFirebase.email;
   }
 
   @override
@@ -89,6 +90,7 @@ return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
       'user_role':this.role.toString(),
       'location':this.location.toJson(),
       'username': this.username,
+      'email': this.email,
     };
   }
 
@@ -103,12 +105,13 @@ return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
             : null);
     this.location.fromJson(data['location']);
     this.username = data['username'];
+    this.email = data['email'];
   }
   void loadDataFromFireStore(BuildContext context)  {
     final userData = Provider.of<QuerySnapshot>(context);
     if (userData != null) {
       for (var v in userData.documents) {
-        if (this.userFromFirebase.uid == v.documentID) {
+        if (this.id == v.documentID) {
           this.setData(v.data);
         }
         print(v.documentID);
