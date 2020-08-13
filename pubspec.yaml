@@ -28,6 +28,7 @@ dependencies:
   email_validator: ^1.0.5
   firebase_auth: ^0.16.1
   flutter_google_places: ^0.2.6
+  flutter_html_view: ^0.5.12
   flutter_multiselect: ^0.5.0
   flutter_spinkit: ^4.1.2
   firebase_storage: ^3.1.6
