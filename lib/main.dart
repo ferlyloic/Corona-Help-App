@@ -3,7 +3,6 @@ import 'package:coronahelpapp/models/service.dart';
 import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/BottomNavigationBar.dart';
-import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
