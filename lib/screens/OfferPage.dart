@@ -44,9 +44,7 @@ class _OfferPageState extends State<OfferPage> {
           style: TextStyle(color: MyApp.getTitleColor(context)),
         ),
       ),
-      body:user == null
-          ? AuthenticateView()
-          : _getCreateServiceFormView(),
+      body:_getCreateServiceFormView(),
     );
   }
   _getErrorTextWidget() {

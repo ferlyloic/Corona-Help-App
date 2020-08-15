@@ -52,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
               style: TextStyle(color: MyApp.getTitleColor(context)),
             ),
           ),
-          body: _getLoginOrProfile(),
+          body: _getProfileView(),
     );
   }
 
@@ -312,8 +312,7 @@ class _ProfilePageState extends State<ProfilePage> {
         : Center(child: CircularProgressIndicator());
   }
 
-  Widget _getLoginOrProfile() {
-    print(isUserConnected);
-    return !isUserConnected ? AuthenticateView() : _profileView();
+  Widget _getProfileView() {
+    return _profileView();
   }
 }

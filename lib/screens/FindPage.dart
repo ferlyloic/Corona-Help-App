@@ -78,15 +78,13 @@ class _FindPageState extends State<FindPage> {
 //      for(Service s in _userServices){
 //        print(s.helpReceiver);
 //      }
-      _userServices = _userServices
-          .where((Service element) =>
+      _userServices = _userServices?.where((Service element) =>
       (element.helpProvider == _user.id) ||
-              (element.helpReceiver == _user.id))
-          .toList();
-      print(_userServices.length);
+              (element.helpReceiver == _user.id)
+          )?.toList();
+      print(_userServices?.length);
     }
-    return (_user == null)
-        ? AuthenticateView():_getServicesListWidget();
+    return _getServicesListWidget();
   }
 
   @override
@@ -105,7 +103,7 @@ class _FindPageState extends State<FindPage> {
 
   _getServicesListWidget() {
 
-    print(_userServices.length);
+    print(_userServices?.length);
 
     return _userServices != null
         ?

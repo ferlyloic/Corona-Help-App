@@ -1,8 +1,11 @@
+import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/HomePage.dart';
 import 'package:coronahelpapp/main.dart';
+import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:coronahelpapp/screens/shared/address_autocompletion.dart';
 import 'package:coronahelpapp/screens/shared/storage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'CoolListView.dart';
 import 'FindPage.dart';
 import 'OfferPage.dart';
@@ -36,7 +39,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Provider.of<User>(context) == null ? AuthenticateView():  Scaffold(
       body: _routes[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
