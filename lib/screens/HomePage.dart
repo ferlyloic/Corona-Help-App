@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         ? RefreshIndicator(
       child: ListView.builder(
           padding: EdgeInsets.all(8),
-          itemCount: _users.length,
+          itemCount: _users?.length,
           itemBuilder: (BuildContext context, int index) {
             ServiceCategory category = _categorie(context);
             return Card(
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
 
   ServiceCategory _categorie(BuildContext context) {
     var all = ServiceCategory.all(context);
-    return all.elementAt(0 + Random().nextInt(all.length));
+    return all.elementAt(0 + Random().nextInt(all?.length));
   }
 
   _getFilter() {
