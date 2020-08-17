@@ -135,22 +135,22 @@ class _FindPageState extends State<FindPage> {
                         Text(
                         _userServices[index].description,
                       ),
-                        Center(
-                          child: SingleChildScrollView(
-                            child: HtmlView(
-                              data:
-                              """<p>Lorem ipsum sollicitudin velit leo proin vivamus augue dictumst, 
-                              litora commodo netus ut amet auctor eu.</p>\r<p>Habitasse sagittis curabitur 
-                              ligula non convallis scelerisque, purus tristique sed aliquam enim, 
-                              phasellus ut integer lorem posuere.</p>\r<p>Consequat quis mollis vulputate curabitur primis, 
-                              leo platea fusce neque primis, turpis sociosqu hendrerit gravida.</p>\r""",
-                              onLaunchFail: (url) { // optional, type Function
-                                print("launch $url failed");
-                              },
-                              scrollable: false, //false to use MarksownBody and true to use Marksown
-                            ),
-                          ),
-                        ),
+//                        Center(
+//                          child: SingleChildScrollView(
+//                            child: HtmlView(
+//                              data:
+//                              """<p>Lorem ipsum sollicitudin velit leo proin vivamus augue dictumst,
+//                              litora commodo netus ut amet auctor eu.</p>\r<p>Habitasse sagittis curabitur
+//                              ligula non convallis scelerisque, purus tristique sed aliquam enim,
+//                              phasellus ut integer lorem posuere.</p>\r<p>Consequat quis mollis vulputate curabitur primis,
+//                              leo platea fusce neque primis, turpis sociosqu hendrerit gravida.</p>\r""",
+//                              onLaunchFail: (url) { // optional, type Function
+//                                print("launch $url failed");
+//                              },
+//                              scrollable: false, //false to use MarksownBody and true to use Marksown
+//                            ),
+//                          ),
+//                        ),
                       ]
                     ),
                     padding: EdgeInsets.fromLTRB(20, 0 , 10, 10),
