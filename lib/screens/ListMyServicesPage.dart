@@ -11,16 +11,16 @@ import 'package:flutter_html_view/flutter_html_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class FindPage extends StatefulWidget {
+class ListMyServicesPage extends StatefulWidget {
   static const String titleString = "Liste";
 
   @override
   State<StatefulWidget> createState() {
-    return _FindPageState();
+    return _ListMyServicesPageState();
   }
 }
 
-class _FindPageState extends State<FindPage> {
+class _ListMyServicesPageState extends State<ListMyServicesPage> {
   List<dynamic> _usersList = [];
 
 
@@ -93,7 +93,7 @@ class _FindPageState extends State<FindPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          FindPage.titleString,
+          ListMyServicesPage.titleString,
           style: TextStyle(color: MyApp.getTitleColor(context)),
         ),
       ),

@@ -40,20 +40,20 @@ class MyApp2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Storage Example',
-      home: MyHomePage(storage: storage),
+      home: ConfigPage(storage: storage),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({this.storage});
+class ConfigPage extends StatefulWidget {
+  ConfigPage({this.storage});
   final FirebaseStorage storage;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ConfigPageState createState() => _ConfigPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ConfigPageState extends State<ConfigPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   List<StorageUploadTask> _tasks = <StorageUploadTask>[];
 

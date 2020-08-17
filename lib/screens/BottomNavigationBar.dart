@@ -2,13 +2,11 @@ import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/screens/HomePage.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/screens/auth/authenticate.dart';
-import 'package:coronahelpapp/screens/shared/address_autocompletion.dart';
-import 'package:coronahelpapp/screens/shared/storage.dart';
+import 'package:coronahelpapp/screens/shared/ConfigPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'CoolListView.dart';
-import 'FindPage.dart';
-import 'OfferPage.dart';
+import 'ListMyServicesPage.dart';
+import 'CreateServicePage.dart';
 import 'ProfilePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -21,12 +19,13 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     with WidgetsBindingObserver {
   int _selectedIndex = 0;
+  // list of all app routes.
   static List<Widget> _routes = [
     HomePage(),
-    OfferPage(),
-    FindPage(),
+    CreateServicePage(),
+    ListMyServicesPage(),
     ProfilePage(),
-    MyHomePage(),
+    ConfigPage(),
 //    AddressAutocompletion()
 //    TabbedAppBarSample(),
   ];
@@ -39,47 +38,49 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
-    return Provider.of<User>(context) == null ? AuthenticateView():  Scaffold(
-      body: _routes[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        unselectedItemColor:
-            MyApp.isDark(context) ? Colors.grey : Colors.white54,
+    return Provider.of<User>(context) == null
+        ? AuthenticateView()
+        : Scaffold(
+            body: _routes[_selectedIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              unselectedItemColor:
+                  MyApp.isDark(context) ? Colors.grey : Colors.white54,
 //        selectedItemColor: MyApp.defaultPrimaryColor,
-        selectedItemColor: MyApp.isDark(context)
-            ? MyApp.getModeInvertedColor(context)
-            : Colors.white,
-        backgroundColor: MyApp.getModeColor(context),
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(HomePage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            title: Text(OfferPage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            title: Text(FindPage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            title: Text(ProfilePage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text("Setting"),
-          ),
+              selectedItemColor: MyApp.isDark(context)
+                  ? MyApp.getModeInvertedColor(context)
+                  : Colors.white,
+              backgroundColor: MyApp.getModeColor(context),
+              onTap: _onItemTapped,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text(HomePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  title: Text(CreateServicePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.list),
+                  title: Text(ListMyServicesPage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  title: Text(ProfilePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  title: Text("Setting"),
+                ),
 //          BottomNavigationBarItem(
 //            icon: Icon(Icons.details),
 //            title: Text('Tab'),
 //          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          );
   }
 
   @override

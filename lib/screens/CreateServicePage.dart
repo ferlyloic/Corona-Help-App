@@ -10,17 +10,17 @@ import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
 import 'package:flutter/material.dart';
 
-class OfferPage extends StatefulWidget {
-  OfferPage({Key key}) : super(key: key);
+class CreateServicePage extends StatefulWidget {
+  CreateServicePage({Key key}) : super(key: key);
   static const String titleString = "Erstellen";
 
   @override
   State<StatefulWidget> createState() {
-    return _OfferPageState();
+    return _CreateServicePageState();
   }
 }
 
-class _OfferPageState extends State<OfferPage> {
+class _CreateServicePageState extends State<CreateServicePage> {
   final _formKey = GlobalKey<FormState>();
   ServiceCategory chosenCategory;
   String textOverCategories = 'Wähle eine Kategorie aus';
@@ -40,7 +40,7 @@ class _OfferPageState extends State<OfferPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          user == null ? OfferPage.titleString : (user.role == UserRole.HelpProvider ? "Hilfe anbieten" :'Hifle suchen'),
+          user == null ? CreateServicePage.titleString : (user.role == UserRole.HelpProvider ? "Hilfe anbieten" :'Hifle suchen'),
           style: TextStyle(color: MyApp.getTitleColor(context)),
         ),
       ),
