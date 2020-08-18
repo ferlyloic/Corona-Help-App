@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/models/service.dart';
 import 'package:coronahelpapp/models/service_category.dart';
@@ -10,6 +12,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   static Color defaultPrimaryColor = Colors.orange;
+  static Color defaultAccentColor = Colors.amberAccent;
   static const kGoogleApiKey = "AIzaSyBQCnZmVPPtw6qhnhB6w9IKa99zNDrydxA";
 //  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
   static const String apiQueryLanguage = 'de';
@@ -17,6 +20,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+//    try {
+//      http.get('https://www.google.com').then((response) {
+//        if (response.statusCode == 200) {
+////        var jsonResponse = convert.jsonDecode(response.body);
+////        var itemCount = jsonResponse['totalItems'];
+//          print('connected');
+//        } else {
+//          print('Request failed with status: ${response.statusCode}.');
+//        }
+//      });
+//    } catch(e){
+////    print(e.message);
+//      print('No internet connection');
+//    }
     return MultiProvider(
             providers:[
               StreamProvider<User>.value(value: User().user),
@@ -29,12 +46,12 @@ class MyApp extends StatelessWidget {
               title: 'Corona Help App',
               theme: ThemeData(
                 primarySwatch: defaultPrimaryColor,
-                accentColor: defaultPrimaryColor,
+                accentColor: defaultAccentColor,
               ),
               darkTheme: ThemeData(
                 brightness: Brightness.dark,
                 primarySwatch: defaultPrimaryColor,
-                accentColor: defaultPrimaryColor,
+                accentColor: defaultAccentColor,
               ),
               home: MyBottomNavigationBar(),
             ),
