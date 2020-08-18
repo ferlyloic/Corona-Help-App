@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
             ServiceCategory category = _categorie(context);
             return Card(
 //              color: MyApp.getModeColor(context),
-              color: category.color(context),
+              color: category?.color(context),
               child: Column(
                 children: <Widget>[
                   ListTile(
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                         backgroundImage: NetworkImage(
                             _users[index]['picture']['large'])),
                     title: Text(_name(_users[index])),
-                    subtitle: Text(category.name),
+                    subtitle: Text(category == null ? '': category.name),
                     trailing: Text(_location(_users[index])),
                   )
                 ],
