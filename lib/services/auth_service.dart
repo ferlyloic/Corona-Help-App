@@ -40,9 +40,7 @@ class AuthService {
     user?.loadDataFromFireStore(context);
     return user;
   }
-  void logout() {
-    _auth.signOut();
-  }
+
 //
 //  // wrapping the firebase calls
 //  Future createUser(
@@ -65,6 +63,10 @@ class AuthService {
       print(result.toString());
       FirebaseUser firebaseUser = result.user;
       return User(userFromFirebase: firebaseUser);
+  }
+  /// logout the current user.
+  void logout() {
+    _auth.signOut();
   }
 //  /// delete the user with corresponding [email] and [password].
 //  Future deleteUser(String email, String password) async {
