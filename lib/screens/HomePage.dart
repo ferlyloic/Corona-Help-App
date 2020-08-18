@@ -128,7 +128,9 @@ class _HomePageState extends State<HomePage> {
 
   ServiceCategory _categorie(BuildContext context) {
     var all = ServiceCategory.all(context);
-    return all.elementAt(0 + Random().nextInt(all?.length));
+    return all == null
+        ? null
+        : all.elementAt(0 + Random().nextInt(all?.length));
   }
 
   _getFilter() {
