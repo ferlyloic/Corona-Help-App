@@ -71,6 +71,7 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
   Widget _buildList() {
     _user = AuthService().getCurrentUser(context);
     _userServices = Service.all(context);
+    _userServices?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
     if(_user != null) {
       List<User> temp = [];
@@ -127,7 +128,7 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                         : ''
                     ),
 //                    subtitle: Text(_userServices[index].id),
-                    trailing: Text('seit '+ _getDatetimeDiff(_userServices[index].createdAt)),
+                    trailing: Text( _userServices[index].getFormattedCreatedAt),
                   ),
                   Container(
                     child: Column(
@@ -166,10 +167,5 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
 //    : Center(child: CircularProgressIndicator());
   }
 
-  String _getDatetimeDiff(DateTime dateTime) {
-    if(dateTime.difference(DateTime.now()).inDays > 0){
-      return dateTime.difference(DateTime.now()).inDays.toString()+' Tag(e)';
-    }
-    return dateTime.hour.toString() + ':'+ dateTime.minute.toString();
-  }
+
 }

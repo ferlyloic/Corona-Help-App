@@ -34,6 +34,23 @@ class Service extends DefaultModel {
     };
   }
 
+
+  get getFormattedCreatedAt {
+    var now = DateTime.now();
+//    print('now: ${now.day - 1}');
+    var difference = now.difference(this.createdAt);
+//    print('created_at: ${this.createdAt.day}');
+    print(difference.inHours);
+    if(difference.inDays > 0) {
+//      return 'Seit '+difference.inDays.toString() + ' Tage.';
+      return 'Am ' + this.createdAt.day.toString() + '.' + this.createdAt.month.toString() + '.' + this.createdAt.year.toString();
+    }
+    if(now.day - 1 == this.createdAt.day){
+      return 'Gestern um ' + this.createdAt.hour.toString() + ':'+ this.createdAt.minute.toString()+'.';
+    }
+    return 'Heute um ' + difference.inHours.toString() + ':'+ difference.inMinutes.toString() +'.';
+  }
+
   @override
   Map<String, dynamic> toMap() {
     // TODO: implement toMap
