@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/screens/auth/signin_view.dart';
 import 'package:coronahelpapp/screens/auth/register_view.dart';
@@ -21,7 +23,11 @@ class _AuthenticateViewState extends State<AuthenticateView> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+    return _getAuthenticateView();
+  }
+
+   _getAuthenticateView() {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
