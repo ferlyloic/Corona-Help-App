@@ -12,7 +12,7 @@ class Service extends DefaultModel {
   String helpProvider;
   String helpReceiver;
   String category;
-  ServiceStatus status;
+  ServiceStatus status = ServiceStatus.NotStarted;
   String description;
   DateTime createdAt;
 
@@ -48,7 +48,8 @@ class Service extends DefaultModel {
     if(now.day - 1 == this.createdAt.day){
       return 'Gestern um ' + this.createdAt.hour.toString() + ':'+ this.createdAt.minute.toString()+'.';
     }
-    return 'Heute um ' + difference.inHours.toString() + ':'+ difference.inMinutes.toString() +'.';
+//    print('created_at: ${this.createdAt.add(Duration(hours: 1))}');
+    return 'Heute um ' + this.createdAt.hour.toString() + ':'+ createdAt.minute.toString() +'.';
   }
 
   @override
