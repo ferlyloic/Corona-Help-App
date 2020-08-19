@@ -140,8 +140,27 @@ class RegisterViewState extends State<RegisterView> {
                     locationInputFieldController.text = '';
                   });
                   value = await _getLocation(value);
-                        _lastname = value;
-                  print(value);
+                  var locationDetails = value.split(',').reversed.toList();
+                  _location = LocationInfo();
+                  var count = 0;
+                  while(count < locationDetails.length){
+                    switch(count){
+                      case 0 :
+                        _location.country = locationDetails[count];
+                        break;
+                      case 1 :
+                        _location.city = locationDetails[count];
+                        break;
+                      case 2 :
+                        _location.houseNumber = locationDetails[count];
+                        break;
+                      case 3 :
+                        _location.street = locationDetails[count];
+                        break;
+                    }
+                    count++;
+                  }
+                  print(_location);
                 },
 //                onSaved: (value) {
 //                  _lastname = value;
@@ -246,6 +265,7 @@ class RegisterViewState extends State<RegisterView> {
                       user.firstName = _firstname;
                       user.lastName = _lastname;
                       user.username = _username;
+                      user.email = _email;
                       user.role = _userRole;
                       user.location = _location;
                       user.create();
@@ -306,7 +326,6 @@ class RegisterViewState extends State<RegisterView> {
     setState(() {
       locationInputFieldController.text = p.description;
     });
-
     print(p.description);
     return p.description;
   }
