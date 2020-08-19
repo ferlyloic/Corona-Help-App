@@ -113,28 +113,268 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
           itemCount: _userServices.length,
           itemBuilder: (BuildContext context, int index) {
             ServiceCategory category = ServiceCategory.find(_userServices[index].category, context);
-            return Card(
+            return GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Scaffold(
+//                    backgroundColor: category.color(context),
+                    appBar: AppBar(
+                      backgroundColor: category.color(context),
+                      centerTitle: true,
+                      title: Text(
+                        category != null ? category.name : '',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    body: Center(
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(height: 20,),
+                            Table(
+                              children: [
+                                TableRow(children: [
+                                  Text(
+                                    "Id:",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.defaultPrimaryColor),
+                                  ),
+                                  Text(
+                                    _userServices[index].id,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "Estellungsdatum:",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.defaultPrimaryColor),
+                                  ),
+                                  Text(
+                                   _userServices[index].createdAt.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "Status:",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.defaultPrimaryColor),
+                                  ),
+                                  Text(
+                                    _userServices[index].status.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "Helfer:",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.defaultPrimaryColor),
+                                  ),
+                                  Text(
+                                    _userServices[index].helpProvider == null? 'N/A': _userServices[index].helpProvider,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "Hilfesuchender(in):",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.defaultPrimaryColor),
+                                  ),
+                                  Text(
+                                    _userServices[index].helpReceiver == null? 'Keine': _userServices[index].helpReceiver,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "Location:",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black),
+                                  ),
+                                  Text(
+                                    _user.location==null? 'N/A':_user.location.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+//                                          fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
+                                  ),
+                                ]),
+                              ],
+                            ),
+                            SizedBox(height: 20,),
+                            Text('Beschreibung:',
+                              style: TextStyle(color: MyApp.defaultPrimaryColor),),
+                            SizedBox(height: 10,),
+                            Text(_userServices[index].description,
+//                          style: TextStyle(color: Colors.white),
+                            ),
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                          RaisedButton(
+                            color: Colors.blue,
+                          child: Text('bearbeiten', style: TextStyle(color: Colors.white),),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                            RaisedButton(
+                              color: Colors.red,
+                            child: Text('löschen', style: TextStyle(color: Colors.white),),
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                title: Text('Wollen Sie wirklich diese Serviceanfrage löschen ?'),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text('ja', style: TextStyle(color: Colors.red),),
+                                        onPressed: () {
+                                          _userServices[index].delete();
+                                         _goBackToMyList();
+                                        },
+                                      ),
+                                      FlatButton(
+                                        child: Text('abbrechen', style: TextStyle(color: Colors.grey),),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  )
+                              );
+                            },
+                          ),],)
+                      ],
+                  ),
+                      ),
+                    ),
+                )));
+                return;
+                showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+//                    backgroundColor: category.color(context),
+                          title: Text(
+                            category != null ? category.name : '',
+                            style: TextStyle(
+                              color:
+                              MyApp.isDark(context)
+                                  ? Colors.white
+                                  :
+                              category.color(context),
+                            ),
+                          ),
+                          content: Container(
+                      height: 200,
+                      child: Column(
+                        children: <Widget>[
+                        Text('Beschreibung:',
+                      style: TextStyle(color: MyApp.defaultPrimaryColor),),
+                        SizedBox(),
+                        Text(_userServices[index].description,
+//                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],),
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('bearbeiten', style: TextStyle(color: Colors.blue),),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text('löschen', style: TextStyle(color: Colors.red),),
+                        onPressed: () {
+                          _userServices[index].delete();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Card(
+
 //              color: MyApp.getModeColor(context),
-              color: category.color(context),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
+                color: category.color(context),
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
 //                    leading: CircleAvatar(
 //                        radius: 30,
 //                        backgroundImage: AssetImage('assets/default_user.png')),
-                    title: Text(category != null
-                        ? category.name
-                        : ''
+                      title: Text(category != null
+                          ? category.name
+                          : '',
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
-//                    subtitle: Text(_userServices[index].id),
-                    trailing: Text( _userServices[index].getFormattedCreatedAt),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Text(
-                        _userServices[index].description,
                       ),
+//                    subtitle: Text(_userServices[index].id),
+                      trailing: Text( _userServices[index].getFormattedCreatedAt,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text(
+                          _userServices[index].description,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                        ),
 //                        Center(
 //                          child: SingleChildScrollView(
 //                            child: HtmlView(
@@ -151,12 +391,13 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
 //                            ),
 //                          ),
 //                        ),
-                      ]
-                    ),
-                    padding: EdgeInsets.fromLTRB(20, 0 , 10, 10),
-                    alignment: Alignment.bottomLeft,
-                  )
-                ],
+                        ]
+                      ),
+                      padding: EdgeInsets.fromLTRB(20, 0 , 10, 10),
+                      alignment: Alignment.bottomLeft,
+                    )
+                  ],
+                ),
               ),
             );
           }),
@@ -164,6 +405,11 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
     )
     :  Container( child:  Text('Sie haben noch keine Einträge'),);
 //    : Center(child: CircularProgressIndicator());
+  }
+
+  void _goBackToMyList() {
+    Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
 
