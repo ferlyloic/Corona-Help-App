@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ListMyServicesPage extends StatefulWidget {
-  static const String titleString = "Liste";
+  static const String titleString = "Meine Liste";
 
   @override
   State<StatefulWidget> createState() {
@@ -70,20 +70,19 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
 
   Widget _buildList() {
     _user = AuthService().getCurrentUser(context);
-    _userServices = Service.all(context);
-    _userServices?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-
     if(_user != null) {
       List<User> temp = [];
-      print(_userServices);
+//      print(_userServices);
 //      for(Service s in _userServices){
 //        print(s.helpReceiver);
 //      }
+      _userServices = Service.all(context);
+      _userServices?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _userServices = _userServices?.where((Service element) =>
       (element.helpProvider == _user.id) ||
               (element.helpReceiver == _user.id)
           )?.toList();
-      print(_userServices?.length);
+//      print(_userServices?.length);
     }
     return _getServicesListWidget();
   }
@@ -104,7 +103,7 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
 
   _getServicesListWidget() {
 
-    print(_userServices?.length);
+//    print(_userServices?.length);
 
     return _userServices != null
         ?
