@@ -24,6 +24,7 @@ class _CreateServicePageState extends State<CreateServicePage> {
   final _formKey = GlobalKey<FormState>();
   ServiceCategory chosenCategory;
   String textOverCategories = 'Wähle eine Kategorie aus';
+  final textInputController = TextEditingController();
 
   bool _onLoading = false;
 
@@ -109,6 +110,7 @@ class _CreateServicePageState extends State<CreateServicePage> {
                 style: TextStyle(
 //                  color: Colors.deepPurple
                 ),
+
                 onChanged: (ServiceCategory newValue) {
                   setState(() {
                     _category = newValue;
@@ -134,6 +136,7 @@ class _CreateServicePageState extends State<CreateServicePage> {
               SizedBox(height: 20.0),
 
               TextFormField(
+                controller: textInputController,
                   onChanged: (value) {
                     _description = value;
                   },
@@ -160,7 +163,6 @@ class _CreateServicePageState extends State<CreateServicePage> {
                   ),
 
                   onPressed: () async {
-                    print("register pressed");
                     if(_formKey.currentState.validate()) {
                       setState(() {
                         _onLoading = true;
@@ -179,7 +181,28 @@ class _CreateServicePageState extends State<CreateServicePage> {
                       service.description = _description;
                       service.status = ServiceStatus.NotStarted;
                       service.create();
+                      textInputController.clear();
                       print("Result: ${service}");
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Success', style: TextStyle(color: Colors.green),),
+                          content: Text('die Serviceanfrage wurde erfolgreich erstellt. 😉'),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text('schliessen'),
+                              onPressed: () {
+
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                      setState(() {
+                        _category = null;
+                        _onLoading = false;
+                      });
 //                              } on /*PlatformException*/Exception catch ( e) {
 //                                setState(() {
 //                                  _onLoading = false;
