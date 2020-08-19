@@ -40,7 +40,7 @@ class Service extends DefaultModel {
 //    print('now: ${now.day - 1}');
     var difference = now.difference(this.createdAt);
 //    print('created_at: ${this.createdAt.day}');
-    print(difference.inHours);
+//    print(difference.inHours);
     if(difference.inDays > 0) {
 //      return 'Seit '+difference.inDays.toString() + ' Tage.';
       return 'Am ' + this.createdAt.day.toString() + '.' + this.createdAt.month.toString() + '.' + this.createdAt.year.toString();

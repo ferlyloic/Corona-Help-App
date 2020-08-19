@@ -95,7 +95,7 @@ return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
   }
 
   void setData(Map<String, dynamic> data) {
-    print(data['user_role']);
+//    print(data['user_role']);
     this.firstName = data['first_name'];
     this.lastName = data['last_name'];
     this.role = data['user_role'] == UserRole.HelpProvider.toString()
@@ -114,7 +114,7 @@ return firebaseUser != null ? User(userFromFirebase: firebaseUser) : null;
         if (this.id == v.documentID) {
           this.setData(v.data);
         }
-        print(v.documentID);
+//        print(v.documentID);
       }
     }
   }

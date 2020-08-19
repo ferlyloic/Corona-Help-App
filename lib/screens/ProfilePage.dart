@@ -25,7 +25,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   SharedPreferences sharedPreferences;
   User _user;
-  bool isUserConnected = false;
 
   Future<void> _getData() async {
     // TODO use this function or delete it.
@@ -41,9 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
      _user = AuthService().getCurrentUser(context);
-     print(_user?.data);
-     isUserConnected = _user != null;
-    print("isConnected :$isUserConnected");
+//     print(_user?.data);
     return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -57,8 +54,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _profileView() {
-    print("entering method profileView");
-    print("_users = ${_user}");
+//    print("entering method profileView");
+//    print("_users = ${_user}");
     return _user != null
         ? RefreshIndicator(
             onRefresh: _getData,
