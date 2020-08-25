@@ -4,17 +4,18 @@ class ValidationService {
   String textToValidate;
   String _errorResult;
   String fieldName;
-  ValidationService(String textToValidate,{this.fieldName = 'This field'}){
-    this.textToValidate = textToValidate;
 
+  ValidationService(String textToValidate, {this.fieldName = 'This field'}) {
+    this.textToValidate = textToValidate;
   }
+
 //  check if the text to validate is not empty.
   bool isNotNull() {
-    if(this.textToValidate == null){
+    if (this.textToValidate == null) {
       _errorResult = '$fieldName cannot be empty.';
       return false;
     }
-    if(this.textToValidate.isEmpty){
+    if (this.textToValidate.isEmpty) {
       _errorResult = '$fieldName cannot be empty.';
       return false;
     }
@@ -41,12 +42,13 @@ class ValidationService {
 
   void isEmail() {
     if (isNotNull() && _errorResult == null) {
-      _errorResult = EmailValidator.validate(textToValidate)? null:
-        '$fieldName must be an correct email address.';
+      _errorResult = EmailValidator.validate(textToValidate)
+          ? null
+          : '$fieldName must be an correct email address.';
     }
   }
 
-  void isStrongPassword(){
+  void isStrongPassword() {
     if (isNotNull() && _errorResult == null) {
       minLength(8);
 //      String pwd = 'the password must have';
@@ -62,28 +64,33 @@ class ValidationService {
 //      if (_errorResult != null) return;
     }
   }
+
   /// validate if the text match the given [pattern] and set the error message with the corresponding [errorText].
-  void _validateStructure(String pattern, String errorText){
+  void _validateStructure(String pattern, String errorText) {
 //    String  pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regExp = RegExp(pattern);
-    _errorResult = regExp.hasMatch(textToValidate) ? null: errorText;
+    _errorResult = regExp.hasMatch(textToValidate) ? null : errorText;
   }
 
-  void hasNoWhiteSpaces(){
-    if(_errorResult!=null) return;
+  void hasNoWhiteSpaces() {
+    if (_errorResult != null) return;
     RegExp regExp = RegExp(r'(?=.*[-\s])');
-    _errorResult = !regExp.hasMatch(textToValidate) ? null: 'No whitespaces allowed.';
+    _errorResult =
+        !regExp.hasMatch(textToValidate) ? null : 'No whitespaces allowed.';
   }
-  void minWordCharacterNumber(int minNumber){
+
+  void minWordCharacterNumber(int minNumber) {
     if (isNotNull() && _errorResult == null) {
       if (minNumber < 0) throw Exception();
       if (_errorResult != null) return;
       RegExp regExp = RegExp('(?=.*[\\w{$minNumber,}].*)');
-      _errorResult =
-      regExp.hasMatch(textToValidate) ? null : 'each word must have at least $minNumber character${minNumber>1?'s':''}.';
+      _errorResult = regExp.hasMatch(textToValidate)
+          ? null
+          : 'each word must have at least $minNumber character${minNumber > 1 ? 's' : ''}.';
     }
   }
-   String errorResult() {
+
+  String errorResult() {
     return _errorResult;
   }
 }

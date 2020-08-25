@@ -55,43 +55,43 @@ class _AddressAutocompletionState extends State<AddressAutocompletion> {
   @override
   Widget build(BuildContext context) {
     return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildDropdownMenu(),
-              RaisedButton(
-                onPressed: _handlePressButton,
-                child: Text("Search places"),
-              ),
-              RaisedButton(
-                child: Text("Custom"),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/search");
-                },
-              ),
-            ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _buildDropdownMenu(),
+          RaisedButton(
+            onPressed: _handlePressButton,
+            child: Text("Search places"),
           ),
+          RaisedButton(
+            child: Text("Custom"),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/search");
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildDropdownMenu() => DropdownButton(
-    value: _mode,
-    items: <DropdownMenuItem<Mode>>[
-      DropdownMenuItem<Mode>(
-        child: Text("Overlay"),
-        value: Mode.overlay,
-      ),
-      DropdownMenuItem<Mode>(
-        child: Text("Fullscreen"),
-        value: Mode.fullscreen,
-      ),
-    ],
-    onChanged: (m) {
-      setState(() {
-        _mode = m;
-      });
-    },
-  );
+        value: _mode,
+        items: <DropdownMenuItem<Mode>>[
+          DropdownMenuItem<Mode>(
+            child: Text("Overlay"),
+            value: Mode.overlay,
+          ),
+          DropdownMenuItem<Mode>(
+            child: Text("Fullscreen"),
+            value: Mode.fullscreen,
+          ),
+        ],
+        onChanged: (m) {
+          setState(() {
+            _mode = m;
+          });
+        },
+      );
 
   void onError(PlacesAutocompleteResponse response) {
 //    print(response.errorMessage);
@@ -136,11 +136,11 @@ Future<Null> displayPrediction(Prediction p, ScaffoldState scaffold) async {
 class CustomSearchScaffold extends PlacesAutocompleteWidget {
   CustomSearchScaffold()
       : super(
-    apiKey: MyApp.kGoogleApiKey,
-    sessionToken: Uuid().generateV4(),
-    language: MyApp.apiQueryLanguage,
-    components: [Component(Component.country, MyApp.apiQueryLanguage)],
-  );
+          apiKey: MyApp.kGoogleApiKey,
+          sessionToken: Uuid().generateV4(),
+          language: MyApp.apiQueryLanguage,
+          components: [Component(Component.country, MyApp.apiQueryLanguage)],
+        );
 
   @override
   _CustomSearchScaffoldState createState() => _CustomSearchScaffoldState();

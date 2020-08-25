@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   static Color defaultPrimaryColor = Colors.orange;
   static Color defaultAccentColor = Colors.amberAccent;
   static const kGoogleApiKey = "AIzaSyBQCnZmVPPtw6qhnhB6w9IKa99zNDrydxA";
+
 //  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
   static const String apiQueryLanguage = 'de';
 
@@ -35,27 +36,28 @@ class MyApp extends StatelessWidget {
 //      print('No internet connection');
 //    }
     return MultiProvider(
-            providers:[
-              StreamProvider<User>.value(value: User().user),
-              StreamProvider<QuerySnapshot>.value(value: User().dataFromFireStore),
-              StreamProvider<List<User>>.value(value: User().users),
-              StreamProvider<List<ServiceCategory>>.value(value: ServiceCategory().categories),
-              StreamProvider<List<Service>>.value(value: Service().services),
-            ],
-            child: MaterialApp(
-              title: 'Corona Help App',
-              theme: ThemeData(
-                primarySwatch: defaultPrimaryColor,
-                accentColor: defaultAccentColor,
-              ),
-              darkTheme: ThemeData(
-                brightness: Brightness.dark,
-                primarySwatch: defaultPrimaryColor,
-                accentColor: defaultAccentColor,
-              ),
-              home: MyBottomNavigationBar(),
-            ),
-          );
+      providers: [
+        StreamProvider<User>.value(value: User().user),
+        StreamProvider<QuerySnapshot>.value(value: User().dataFromFireStore),
+        StreamProvider<List<User>>.value(value: User().users),
+        StreamProvider<List<ServiceCategory>>.value(
+            value: ServiceCategory().categories),
+        StreamProvider<List<Service>>.value(value: Service().services),
+      ],
+      child: MaterialApp(
+        title: 'Corona Help App',
+        theme: ThemeData(
+          primarySwatch: defaultPrimaryColor,
+          accentColor: defaultAccentColor,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: defaultPrimaryColor,
+          accentColor: defaultAccentColor,
+        ),
+        home: MyBottomNavigationBar(),
+      ),
+    );
   }
 
   static Color getModeColor(BuildContext context) {

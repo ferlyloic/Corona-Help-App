@@ -10,8 +10,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   User _currentUser;
 
-
-
   Future<User> anonymSign() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
@@ -24,11 +22,6 @@ class AuthService {
       return null;
     }
   }
-
-
-
-
-
 
 //
 //  AuthService() {
@@ -50,24 +43,31 @@ class AuthService {
 //        String password}) async {}
 //
   /// logs in the user with corresponding [email] and [password].
-  Future<User> signInWithEmailAndPassword({String email, String password}) async {
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
-      print(result.toString());
-      FirebaseUser firebaseUser = result.user;
+  Future<User> signInWithEmailAndPassword(
+      {String email, String password}) async {
+    AuthResult result = await _auth.signInWithEmailAndPassword(
+        email: email, password: password);
+    print(result.toString());
+    FirebaseUser firebaseUser = result.user;
 //      print(firebaseUser.uid);
-      return User(userFromFirebase: firebaseUser);
+    return User(userFromFirebase: firebaseUser);
   }
+
   /// register the user with corresponding [email] and [password].
-  Future<User> registerWithEmailAndPassword({String email, String password}) async {
-      AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      print(result.toString());
-      FirebaseUser firebaseUser = result.user;
-      return User(userFromFirebase: firebaseUser);
+  Future<User> registerWithEmailAndPassword(
+      {String email, String password}) async {
+    AuthResult result = await _auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    print(result.toString());
+    FirebaseUser firebaseUser = result.user;
+    return User(userFromFirebase: firebaseUser);
   }
+
   /// logout the current user.
   void logout() {
     _auth.signOut();
   }
+
 //  /// delete the user with corresponding [email] and [password].
 //  Future deleteUser(String email, String password) async {
 //    try {
@@ -87,8 +87,9 @@ class AuthService {
   /// delete the current user in [context].
   Future deleteUser(BuildContext context) async {
     try {
-    User user = AuthService().getCurrentUser(context);
-      await DatabaseService(uid: user.userFromFirebase.uid).deleteUser(); // called from database class
+      User user = AuthService().getCurrentUser(context);
+      await DatabaseService(uid: user.userFromFirebase.uid)
+          .deleteUser(); // called from database class
       await user.userFromFirebase.delete();
       return true;
     } catch (e) {

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/models/default_model.dart';
 import 'package:coronahelpapp/models/service_category.dart';
@@ -17,6 +16,7 @@ class Service extends DefaultModel {
   DateTime createdAt;
 
   Service();
+
   @override
   // TODO: implement collectionName
   String get collectionName => 'services';
@@ -25,15 +25,14 @@ class Service extends DefaultModel {
   // TODO: implement data
   Map<String, dynamic> get data {
     return {
-      'help_provider':this.helpProvider?.toString(),
-      'help_receiver':this.helpReceiver?.toString(),
-      'category':this.category,
-      'description':this.description,
-      'status':this.status?.toString(),
-      'created_at':this.createdAt,
+      'help_provider': this.helpProvider?.toString(),
+      'help_receiver': this.helpReceiver?.toString(),
+      'category': this.category,
+      'description': this.description,
+      'status': this.status?.toString(),
+      'created_at': this.createdAt,
     };
   }
-
 
   get getFormattedCreatedAt {
     var now = DateTime.now();
@@ -41,15 +40,28 @@ class Service extends DefaultModel {
     var difference = now.difference(this.createdAt);
 //    print('created_at: ${this.createdAt.day}');
 //    print(difference.inHours);
-    if(difference.inDays > 0) {
+    if (difference.inDays > 0) {
 //      return 'Seit '+difference.inDays.toString() + ' Tage.';
-      return 'Am ' + this.createdAt.day.toString() + '.' + this.createdAt.month.toString() + '.' + this.createdAt.year.toString();
+      return 'Am ' +
+          this.createdAt.day.toString() +
+          '.' +
+          this.createdAt.month.toString() +
+          '.' +
+          this.createdAt.year.toString();
     }
-    if(now.day - 1 == this.createdAt.day){
-      return 'Gestern um ' + this.createdAt.hour.toString() + ':'+ this.createdAt.minute.toString()+'.';
+    if (now.day - 1 == this.createdAt.day) {
+      return 'Gestern um ' +
+          this.createdAt.hour.toString() +
+          ':' +
+          this.createdAt.minute.toString() +
+          '.';
     }
 //    print('created_at: ${this.createdAt.add(Duration(hours: 1))}');
-    return 'Heute um ' + this.createdAt.hour.toString() + ':'+ createdAt.minute.toString() +'.';
+    return 'Heute um ' +
+        this.createdAt.hour.toString() +
+        ':' +
+        createdAt.minute.toString() +
+        '.';
   }
 
   @override
@@ -80,11 +92,13 @@ class Service extends DefaultModel {
     result?.sort((a, b) => a.createdAt.compareTo(b.createdAt));
     return result;
   }
+
   @override
   String toString() {
     // TODO: implement toString
     return data.toString();
   }
+
   ServiceCategory categoryObject(BuildContext context) {
     return ServiceCategory.find(this.category, context);
   }

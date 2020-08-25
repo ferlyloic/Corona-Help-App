@@ -35,16 +35,11 @@ class _HomePageState extends State<HomePage> {
         body: Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: Column(children: <Widget>[
-             _getFilter(),
+              _getFilter(),
               SizedBox(height: 20.0),
               Expanded(child: _buildList()),
             ])));
   }
-
-
-
-
-
 
   List<dynamic> _users = [];
   final String apiUrl = "https://randomuser.me/api/?results=10&nat=de";
@@ -59,16 +54,17 @@ class _HomePageState extends State<HomePage> {
   void fetchCategories() async {
     print(apiUrl);
     var result = await http.get(apiUrl);
-    setState(()  {
+    setState(() {
       _users = json.decode(result.body)['results'];
 //      _users.sort((a, b) => a[ 'name']['last'].compareTo(b['name']['last']));
-     CollectionReference reference = Firestore.instance.collection('example_users');
+      CollectionReference reference =
+          Firestore.instance.collection('example_users');
       AuthService _authService = AuthService();
-      for(var user in _users){
-       print(user);
+      for (var user in _users) {
+        print(user);
 //       User u = await _authService.registerWithEmailAndPassword(email: user['email'],password: 'qqqqqqqq');
 //       reference.document(user['email']).setData(user);
-     }
+      }
       print(_users?.length);
     });
   }
@@ -88,36 +84,38 @@ class _HomePageState extends State<HomePage> {
   String _age(Map<dynamic, dynamic> user) {
     return "Age: " + user['dob']['age'].toString();
   }
+
   Widget _buildList() {
     return _users?.length != 0
         ? RefreshIndicator(
-      child: ListView.builder(
-          padding: EdgeInsets.all(8),
-          itemCount: _users?.length,
-          itemBuilder: (BuildContext context, int index) {
-            ServiceCategory category = _categorie(context);
-            return Card(
+            child: ListView.builder(
+                padding: EdgeInsets.all(8),
+                itemCount: _users?.length,
+                itemBuilder: (BuildContext context, int index) {
+                  ServiceCategory category = _categorie(context);
+                  return Card(
 //              color: MyApp.getModeColor(context),
-              color: category?.color(context),
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: CircleAvatar(
-                        radius: 30,
-                        backgroundImage: NetworkImage(
-                            _users[index]['picture']['large'])),
-                    title: Text(_name(_users[index])),
-                    subtitle: Text(category == null ? '': category.name),
-                    trailing: Text(_location(_users[index])),
-                  )
-                ],
-              ),
-            );
-          }),
-      onRefresh: _getData,
-    )
+                    color: category?.color(context),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          leading: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(
+                                  _users[index]['picture']['large'])),
+                          title: Text(_name(_users[index])),
+                          subtitle: Text(category == null ? '' : category.name),
+                          trailing: Text(_location(_users[index])),
+                        )
+                      ],
+                    ),
+                  );
+                }),
+            onRefresh: _getData,
+          )
         : Center(child: CircularProgressIndicator());
   }
+
   @override
   void initState() {
     print("init HOME");
@@ -135,7 +133,6 @@ class _HomePageState extends State<HomePage> {
 
   _getFilter() {
     return MultiSelect(
-
         autovalidate: false,
         titleText: "Filter-Optionen auswählen",
         validator: (value) {

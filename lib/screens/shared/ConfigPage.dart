@@ -34,6 +34,7 @@ void main() async {
 
 class MyApp2 extends StatelessWidget {
   MyApp2({this.storage});
+
   final FirebaseStorage storage;
 
   @override
@@ -47,6 +48,7 @@ class MyApp2 extends StatelessWidget {
 
 class ConfigPage extends StatefulWidget {
   ConfigPage({this.storage});
+
   final FirebaseStorage storage;
 
   @override
@@ -64,7 +66,7 @@ class _ConfigPageState extends State<ConfigPage> {
     await file.writeAsString(kTestString);
     assert(await file.readAsString() == kTestString);
     final StorageReference ref =
-    widget.storage.ref().child('text').child('foo$uuid.txt');
+        widget.storage.ref().child('text').child('foo$uuid.txt');
     final StorageUploadTask uploadTask = ref.putFile(
       file,
       StorageMetadata(
@@ -102,8 +104,8 @@ class _ConfigPageState extends State<ConfigPage> {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text(
         'Success!\n Downloaded $name \n from url: $url @ bucket: $bucket\n '
-            'at path: $path \n\nFile contents: "$fileContents" \n'
-            'Wrote "$tempFileContents" to tmp.txt',
+        'at path: $path \n\nFile contents: "$fileContents" \n'
+        'Wrote "$tempFileContents" to tmp.txt',
         style: const TextStyle(color: Color.fromARGB(255, 0, 155, 0)),
       ),
     ));
@@ -128,7 +130,7 @@ class _ConfigPageState extends State<ConfigPage> {
           IconButton(
             icon: const Icon(Icons.clear_all),
             onPressed:
-            _tasks.isNotEmpty ? () => setState(() => _tasks.clear()) : null,
+                _tasks.isNotEmpty ? () => setState(() => _tasks.clear()) : null,
           )
         ],
       ),

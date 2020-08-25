@@ -13,8 +13,9 @@ class _CoolListViewPageState extends State<CoolListViewPage> {
   final dio = new Dio(); // for http requests
   Widget _appBarTitle = new Text('Search...');
   Icon _searchIcon = new Icon(Icons.search);
-  final String title ="Calendarro";
+  final String title = "Calendarro";
   Calendarro monthCalendarro;
+
   @override
   Widget build(BuildContext context) {
     var startDate = DateUtils.getFirstDayOfCurrentMonth();
@@ -28,14 +29,14 @@ class _CoolListViewPageState extends State<CoolListViewPage> {
         onTap: (date) {
           print("onTap: $date");
         });
-    return  Column(
-        children: <Widget>[
+    return Column(
+      children: <Widget>[
 //          Container(
 //            child: Calendarro(),
 //          ),
-          Container(height: 32.0),
-          monthCalendarro
-        ],
+        Container(height: 32.0),
+        monthCalendarro
+      ],
     );
   }
 }

@@ -1,5 +1,4 @@
-
-enum ServiceStatus{
+enum ServiceStatus {
   NotStarted,
   InProgress,
   Done,

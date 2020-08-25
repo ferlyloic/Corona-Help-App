@@ -7,17 +7,18 @@ import 'package:flutter/material.dart';
 
 class SingleServiceView extends StatefulWidget {
   Service _service;
+
   SingleServiceView(this._service);
+
   @override
   _SingleServiceViewState createState() => _SingleServiceViewState();
 }
+
 class _SingleServiceViewState extends State<SingleServiceView> {
-
-
   @override
   Widget build(BuildContext context) {
-    ServiceCategory category = ServiceCategory.find(
-        widget._service.category, context);
+    ServiceCategory category =
+        ServiceCategory.find(widget._service.category, context);
     final User _user = AuthService().getCurrentUser(context);
     return Scaffold(
 //                    backgroundColor: category.color(context),
@@ -45,18 +46,15 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Id:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp
-                              .defaultPrimaryColor),
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.defaultPrimaryColor),
                     ),
                     Text(
                       widget._service.id,
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -66,20 +64,15 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Estellungsdatum:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp
-                              .defaultPrimaryColor),
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.defaultPrimaryColor),
                     ),
                     Text(
-                      widget._service
-                          .createdAt
-                          .toString(),
+                      widget._service.createdAt.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -89,20 +82,15 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Status:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp
-                              .defaultPrimaryColor),
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.defaultPrimaryColor),
                     ),
                     Text(
-                      widget._service
-                          .status
-                          .toString(),
+                      widget._service.status.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -112,23 +100,17 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Helfer:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp
-                              .defaultPrimaryColor),
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.defaultPrimaryColor),
                     ),
                     Text(
-                      widget._service
-                          .helpProvider ==
-                          null
+                      widget._service.helpProvider == null
                           ? 'N/A'
-                          : widget._service
-                          .helpProvider,
+                          : widget._service.helpProvider,
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -138,23 +120,17 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Hilfesuchender(in):",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp
-                              .defaultPrimaryColor),
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.defaultPrimaryColor),
                     ),
                     Text(
-                      widget._service
-                          .helpReceiver ==
-                          null
+                      widget._service.helpReceiver == null
                           ? 'Keine'
-                          : widget._service
-                          .helpReceiver,
+                          : widget._service.helpReceiver,
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -164,23 +140,19 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                       "Location:",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          fontWeight: FontWeight.bold,
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black),
                     ),
                     Text(
                       _user.location == null
                           ? 'N/A'
-                          : _user.location
-                          .toString(),
+                          : _user.location.toString(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
-                          color: MyApp.isDark(
-                              context)
+                          color: MyApp.isDark(context)
                               ? Colors.white
                               : Colors.black45),
                     ),
@@ -192,9 +164,7 @@ class _SingleServiceViewState extends State<SingleServiceView> {
               ),
               Text(
                 'Beschreibung:',
-                style: TextStyle(
-                    color: MyApp
-                        .defaultPrimaryColor),
+                style: TextStyle(color: MyApp.defaultPrimaryColor),
               ),
               SizedBox(
                 height: 10,
@@ -207,15 +177,13 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment:
-                MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   RaisedButton(
                     color: Colors.blue,
                     child: Text(
                       'bearbeiten',
-                      style: TextStyle(
-                          color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -225,49 +193,36 @@ class _SingleServiceViewState extends State<SingleServiceView> {
                     color: Colors.red,
                     child: Text(
                       'löschen',
-                      style: TextStyle(
-                          color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
                       showDialog(
                           context: context,
-                          builder:
-                              (_) => AlertDialog(
-                            title: Text(
-                                'Wollen Sie wirklich diese Serviceanfrage löschen ?'),
-                            actions: <
-                                Widget>[
-                              FlatButton(
-                                child:
-                                Text(
-                                  'ja',
-                                  style: TextStyle(
-                                      color:
-                                      Colors.red),
-                                ),
-                                onPressed:
-                                    () {
-                                      widget._service
-                                      .delete();
-                                  _goBackToMyList();
-                                },
-                              ),
-                              FlatButton(
-                                child:
-                                Text(
-                                  'abbrechen',
-                                  style: TextStyle(
-                                      color:
-                                      Colors.grey),
-                                ),
-                                onPressed:
-                                    () {
-                                  Navigator.of(context)
-                                      .pop();
-                                },
-                              ),
-                            ],
-                          ));
+                          builder: (_) => AlertDialog(
+                                title: Text(
+                                    'Wollen Sie wirklich diese Serviceanfrage löschen ?'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text(
+                                      'ja',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    onPressed: () {
+                                      widget._service.delete();
+                                      _goBackToMyList();
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text(
+                                      'abbrechen',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              ));
                     },
                   ),
                 ],
@@ -278,6 +233,7 @@ class _SingleServiceViewState extends State<SingleServiceView> {
       ),
     );
   }
+
   void _goBackToMyList() {
     Navigator.of(context).pop();
     Navigator.of(context).pop();

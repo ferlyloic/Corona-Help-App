@@ -1,4 +1,3 @@
-
 import 'package:geolocator/geolocator.dart';
 
 class LocationInfo {
@@ -6,30 +5,31 @@ class LocationInfo {
   Position _currentPosition;
   String _currentAddress;
 
-
   String houseNumber = 'N/A';
   String street = 'N/A';
-  String postalCode  = 'N/A';
+  String postalCode = 'N/A';
   String city = 'N/A';
-  String country  = 'N/A';
+  String country = 'N/A';
+
   LocationInfo();
+
   @override
   String toString() {
     String result = '';
-    if(this.street != null) result += this.street + ' ';
-    if(this.houseNumber != null) result += this.houseNumber + ', ';
-    if(this.postalCode != null) result += this.postalCode + ' ';
-    if(this.city != null) result += this.city + ', ';
-    if(this.country != null) result += this.country;
+    if (this.street != null) result += this.street + ' ';
+    if (this.houseNumber != null) result += this.houseNumber + ', ';
+    if (this.postalCode != null) result += this.postalCode + ' ';
+    if (this.city != null) result += this.city + ', ';
+    if (this.country != null) result += this.country;
     return result;
   }
-   getCurrentLocation() async {
+
+  getCurrentLocation() async {
     Placemark p = await geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.low)
         .then((Position position) {
       _currentPosition = position;
       return _getAddressFromLatLng();
-
     }).catchError((e) {
       print(e);
     });

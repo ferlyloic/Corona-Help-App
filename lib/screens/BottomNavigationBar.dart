@@ -19,6 +19,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     with WidgetsBindingObserver {
   int _selectedIndex = 0;
+
   // list of all app routes.
   static List<Widget> _routes = [
     HomePage(),
@@ -64,45 +65,45 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     return Provider.of<User>(context) == null
         ? AuthenticateView()
         : Scaffold(
-      body: _routes[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        unselectedItemColor:
-        MyApp.isDark(context) ? Colors.grey : Colors.white54,
+            body: _routes[_selectedIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _selectedIndex,
+              unselectedItemColor:
+                  MyApp.isDark(context) ? Colors.grey : Colors.white54,
 //        selectedItemColor: MyApp.defaultPrimaryColor,
-        selectedItemColor: MyApp.isDark(context)
-            ? MyApp.getModeInvertedColor(context)
-            : Colors.white,
-        backgroundColor: MyApp.getModeColor(context),
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(HomePage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            title: Text(CreateServicePage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            title: Text(ListMyServicesPage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            title: Text(ProfilePage.titleString),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            title: Text("Setting"),
-          ),
+              selectedItemColor: MyApp.isDark(context)
+                  ? MyApp.getModeInvertedColor(context)
+                  : Colors.white,
+              backgroundColor: MyApp.getModeColor(context),
+              onTap: _onItemTapped,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text(HomePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.add),
+                  title: Text(CreateServicePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.list),
+                  title: Text(ListMyServicesPage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  title: Text(ProfilePage.titleString),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  title: Text("Setting"),
+                ),
 //          BottomNavigationBarItem(
 //            icon: Icon(Icons.details),
 //            title: Text('Tab'),
 //          ),
-        ],
-      ),
-    );
+              ],
+            ),
+          );
   }
 }

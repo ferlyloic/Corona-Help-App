@@ -13,21 +13,21 @@ class AuthenticateView extends StatefulWidget {
 }
 
 class _AuthenticateViewState extends State<AuthenticateView> {
-
   bool isLoginView = true;
+
   /// toggle between login and register views.
-  void toggleView(){
+  void toggleView() {
     setState(() {
       isLoginView = !isLoginView;
     });
   }
 
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     return _getAuthenticateView();
   }
 
-   _getAuthenticateView() {
+  _getAuthenticateView() {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,7 +37,9 @@ class _AuthenticateViewState extends State<AuthenticateView> {
         ),
       ),
       body: Container(
-        child: isLoginView ? SignInView(toggleView: toggleView) : RegisterView(toggleView: toggleView),
+        child: isLoginView
+            ? SignInView(toggleView: toggleView)
+            : RegisterView(toggleView: toggleView),
       ),
     );
   }

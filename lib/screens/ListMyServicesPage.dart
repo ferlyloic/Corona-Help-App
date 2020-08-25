@@ -56,6 +56,7 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
       body: _buildList(),
     );
   }
+
 //  return the ListView of the service widgets
   _getServicesListWidget() {
     // if there is a authenticated user, show the list of all his/her services.
@@ -70,17 +71,21 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SingleServiceView(_userServices[index])
-                          )
-                      );
+                              builder: (context) =>
+                                  SingleServiceView(_userServices[index])));
                     },
                     child: Card(
-                      color: _userServices[index].categoryObject(context).color(context),
+                      color: _userServices[index]
+                          .categoryObject(context)
+                          .color(context),
                       child: Column(
                         children: <Widget>[
                           ListTile(
                             title: Text(
-                               _userServices[index].categoryObject(context).name ?? '',
+                              _userServices[index]
+                                      .categoryObject(context)
+                                      .name ??
+                                  '',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -111,7 +116,10 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                 }),
           )
         : Center(
-            child: Text('Sie haben noch keine Einträge', style: TextStyle(color: MyApp.defaultPrimaryColor),),
+            child: Text(
+              'Sie haben noch keine Einträge',
+              style: TextStyle(color: MyApp.defaultPrimaryColor),
+            ),
           );
 //    : Center(child: CircularProgressIndicator());
   }

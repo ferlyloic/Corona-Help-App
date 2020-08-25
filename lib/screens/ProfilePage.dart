@@ -39,17 +39,17 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-     _user = AuthService().getCurrentUser(context);
+    _user = AuthService().getCurrentUser(context);
 //     print(_user?.data);
     return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              ProfilePage.titleString,
-              style: TextStyle(color: MyApp.getTitleColor(context)),
-            ),
-          ),
-          body: _getProfileView(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          ProfilePage.titleString,
+          style: TextStyle(color: MyApp.getTitleColor(context)),
+        ),
+      ),
+      body: _getProfileView(),
     );
   }
 
@@ -83,7 +83,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Center(
                           child: ListView(
                             children: <Widget>[
-                              SizedBox( height: 50,),
+                              SizedBox(
+                                height: 50,
+                              ),
                               Table(
                                 children: [
                                   TableRow(children: [
@@ -97,7 +99,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.firstName == null ? 'N/A':_user.firstName,
+                                      _user.firstName == null
+                                          ? 'N/A'
+                                          : _user.firstName,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -117,7 +121,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.lastName == null ? 'N/A':_user.lastName,
+                                      _user.lastName == null
+                                          ? 'N/A'
+                                          : _user.lastName,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -137,7 +143,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.username == null ? 'N/A':_user.username,
+                                      _user.username == null
+                                          ? 'N/A'
+                                          : _user.username,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -177,7 +185,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.role == null? 'N/A':_user.getRole(),
+                                      _user.role == null
+                                          ? 'N/A'
+                                          : _user.getRole(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -197,7 +207,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                               : Colors.black),
                                     ),
                                     Text(
-                                      _user.location==null? 'N/A':_user.location.toString(),
+                                      _user.location == null
+                                          ? 'N/A'
+                                          : _user.location.toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
 //                                          fontWeight: FontWeight.bold,
@@ -208,41 +220,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ]),
                                 ],
                               ),
-                              SizedBox( height: 10,),
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  "Beschreibung",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color:
-                                      MyApp.isDark(context)
-                                          ? Colors.white
-                                          : Colors.black
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Beschreibung",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black),
                                   ),
-                                ),
-                                Text(
-                                  _user.description,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  Text(
+                                    _user.description,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
 //                                      fontWeight: FontWeight.bold,
-                                      color:
-                                      MyApp.isDark(context)
-                                          ? Colors.white
-                                          : Colors.black45
+                                        color: MyApp.isDark(context)
+                                            ? Colors.white
+                                            : Colors.black45),
                                   ),
-                                ),
-                              ],
-                            ),
-                              SizedBox( height: 20,),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
                               RaisedButton(
                                 color: MyApp.defaultPrimaryColor,
                                 child: Text(
                                   "Abmelden",
                                   style: TextStyle(
-                                      color:
-                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                      color: MyApp.isDark(context)
+                                          ? Colors.black
+                                          : Colors.white),
                                 ),
                                 onPressed: () {
                                   print("Logout pressed");
@@ -255,8 +268,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Text(
                                   "Bearbeiten",
                                   style: TextStyle(
-                                      color:
-                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                      color: MyApp.isDark(context)
+                                          ? Colors.black
+                                          : Colors.white),
                                 ),
                                 onPressed: () {
                                   print("update pressed");
@@ -269,8 +283,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Text(
                                   "Konto entfernen",
                                   style: TextStyle(
-                                      color:
-                                      MyApp.isDark(context) ? Colors.black : Colors.white),
+                                      color: MyApp.isDark(context)
+                                          ? Colors.black
+                                          : Colors.white),
                                 ),
                                 onPressed: () {
                                   print("delete pressed");
