@@ -1,15 +1,9 @@
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/service.dart';
-import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/user.dart';
-import 'package:coronahelpapp/models/user_role.dart';
-import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html_view/flutter_html_view.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import 'SingleServiceView.dart';
 
@@ -61,13 +55,12 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
       ),
       body: _buildList(),
     );
-  }
-
+  
+//  return the ListView of the service widgets
   _getServicesListWidget() {
-//    print(_userServices?.length);
-
+    // if there is a authenticated user, show the list of all his/her services.
     return _userServices != null
-        ? RefreshIndicator(
+        ? Container(
             child: ListView.builder(
                 padding: EdgeInsets.all(8),
                 itemCount: _userServices.length,
@@ -82,21 +75,16 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                       );
                     },
                     child: Card(
-//              color: MyApp.getModeColor(context),
                       color: _userServices[index].categoryObject(context).color(context),
                       child: Column(
                         children: <Widget>[
                           ListTile(
-//                    leading: CircleAvatar(
-//                        radius: 30,
-//                        backgroundImage: AssetImage('assets/default_user.png')),
                             title: Text(
                                _userServices[index].categoryObject(context).name ?? '',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
                             ),
-//                    subtitle: Text(_userServices[index].id),
                             trailing: Text(
                               _userServices[index].getFormattedCreatedAt,
                               style: TextStyle(
@@ -112,22 +100,6 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                                   color: Colors.white,
                                 ),
                               ),
-//                        Center(
-//                          child: SingleChildScrollView(
-//                            child: HtmlView(
-//                              data:
-//                              """<p>Lorem ipsum sollicitudin velit leo proin vivamus augue dictumst,
-//                              litora commodo netus ut amet auctor eu.</p>\r<p>Habitasse sagittis curabitur
-//                              ligula non convallis scelerisque, purus tristique sed aliquam enim,
-//                              phasellus ut integer lorem posuere.</p>\r<p>Consequat quis mollis vulputate curabitur primis,
-//                              leo platea fusce neque primis, turpis sociosqu hendrerit gravida.</p>\r""",
-//                              onLaunchFail: (url) { // optional, type Function
-//                                print("launch $url failed");
-//                              },
-//                              scrollable: false, //false to use MarksownBody and true to use Marksown
-//                            ),
-//                          ),
-//                        ),
                             ]),
                             padding: EdgeInsets.fromLTRB(20, 0, 10, 10),
                             alignment: Alignment.bottomLeft,
@@ -138,8 +110,8 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
                   );
                 }),
           )
-        : Container(
-            child: Text('Sie haben noch keine Einträge'),
+        : Center(
+            child: Text('Sie haben noch keine Einträge', style: TextStyle(color: MyApp.defaultPrimaryColor),),
           );
 //    : Center(child: CircularProgressIndicator());
   }
