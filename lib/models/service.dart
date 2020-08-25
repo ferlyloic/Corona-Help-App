@@ -85,4 +85,7 @@ class Service extends DefaultModel {
     // TODO: implement toString
     return data.toString();
   }
+  ServiceCategory categoryObject(BuildContext context) {
+    return ServiceCategory.find(this.category, context);
+  }
 }
