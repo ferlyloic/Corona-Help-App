@@ -55,7 +55,7 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
       ),
       body: _buildList(),
     );
-  
+  }
 //  return the ListView of the service widgets
   _getServicesListWidget() {
     // if there is a authenticated user, show the list of all his/her services.
