@@ -21,20 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-//    try {
-//      http.get('https://www.google.com').then((response) {
-//        if (response.statusCode == 200) {
-////        var jsonResponse = convert.jsonDecode(response.body);
-////        var itemCount = jsonResponse['totalItems'];
-//          print('connected');
-//        } else {
-//          print('Request failed with status: ${response.statusCode}.');
-//        }
-//      });
-//    } catch(e){
-////    print(e.message);
-//      print('No internet connection');
-//    }
     return MultiProvider(
       providers: [
         StreamProvider<User>.value(value: User().user),
@@ -66,13 +52,6 @@ class MyApp extends StatelessWidget {
 
   static Color getColor(BuildContext context, Brightness brightness) {
     if (MediaQuery.of(context).platformBrightness == brightness) {
-//      Color defaultColor = MyApp.defaultPrimaryColor;
-//      HSLColor hue = HSLColor.fromColor(defaultColor);
-//      print(hue.hue);
-//      hue = HSLColor.fromAHSL(hue.alpha, (hue.hue + 180) % 360, hue.saturation, hue.lightness);
-//      print(hue.hue);
-//      defaultColor = hue.toColor();
-//        return defaultColor;
       return Colors.black12;
     }
     return MyApp.defaultPrimaryColor;

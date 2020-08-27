@@ -98,9 +98,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
                   icon: Icon(Icons.settings),
                   title: Text("Setting"),
                 ),
-//          BottomNavigationBarItem(
-//            icon: Icon(Icons.details),
-//            title: Text('Tab'),
 //          ),
               ],
             ),

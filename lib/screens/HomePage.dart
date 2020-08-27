@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void fetchCategories() async {
+    // TODO: change this after. This is only for testing.
     print(apiUrl);
     var result = await http.get(apiUrl);
     setState(() {
@@ -79,10 +80,6 @@ class _HomePageState extends State<HomePage> {
 
   String _location(dynamic user) {
     return user['location']['city'];
-  }
-
-  String _age(Map<dynamic, dynamic> user) {
-    return "Age: " + user['dob']['age'].toString();
   }
 
   Widget _buildList() {
