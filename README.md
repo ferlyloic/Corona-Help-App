@@ -180,6 +180,36 @@ bestimmte Kriterien erfüllen:
     Verwendung von bekannten und gut dokumentierten Techniken für die
     Implementierungen (Usability, Design, etc...) erreicht.
 
+Entwurf und Architektur
+=======================
+
+System Architektur
+------------------
+
+Datenbankschema
+---------------
+
+Der Anwendung werden die folgenden Entitäten zugeordnet:
+
+1.  **Die Benutzer (*USER*)**: Jeder Benutzer kann ein Konto erstellen,
+    ändern oder löschen. Jeder Benutzer hat einen Benutzernamen , eine
+    Rolle (Hilfeanbieter oder Hilfesuchender), einen Vor- und Nachnamen,
+    eine E-Mail-Adresse sowie eine Beschreibung und einen Standort.
+
+2.  **Die Servicekategorien (*CATEGORY*)**: Um Filterfunktionen
+    implementieren zu können, ist es notwendig, die Dienste in
+    Kategorien zu klassifizieren, was die Suche erleichtert. Eine
+    Kategorie hat einen Namen und eine Beschreibung. Mehrere Leistungen
+    können zur gleichen Kategorie gehören.
+
+3.  **Die Services (*SERVICE*)**: Ein Service hat einen Hilfeanbieter,
+    einen Hilfesuchender, eine Kategorie, einen Status, eine
+    Beschreibung und ein Datum.
+
+<figure>
+<img src="images/map/database_schema_Corona-Help-App.png" id="fig:database_schema_Corona-Help-App" style="width:15cm" alt="Datenbankschema - Corona-Help-App. " /><figcaption aria-hidden="true">Datenbankschema - Corona-Help-App. </figcaption>
+</figure>
+
 Implementierung
 ===============
 
