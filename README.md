@@ -303,3 +303,40 @@ verwendet.
 Für die Authentifizierung wird dem Package **firebase\_auth** in
 **pubspeck.yaml** hinzugefügt. Zusätzliche Benutzerinformationen werden
 mithilfe des **cloud\_firestore**-Pakets gespeichert.
+
+    dependencies:
+    # ...
+      firebase_auth: ^0.16.1
+      cloud_firestore: ^0.13.7
+    # ... 
+
+Die Klasse **AuthService** bildet die Schnittstelle zwischen der App und
+Firebase. Hier werden die für die **Anmeldung**, **Registrierung**,
+**Abmeldung** und **Konto-Löschung** definiert.
+
+    // ...
+    // ... 
+
+### Test-User Generator
+
+### Profile
+
+Kategorien und Services
+-----------------------
+
+### Kategorien
+
+### Services
+
+#### Service erstellen
+
+#### Service bearbeiten
+
+#### Service löschen
+
+#### Liste eigener Services
+
+#### Liste der Services
+
+Alternative Technologie
+-----------------------
