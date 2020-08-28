@@ -14,10 +14,6 @@ class DatabaseService {
 
   DatabaseService({this.uid});
 
-  Future updateUserData() async {
-    return await userCollection.document(uid).delete();
-  }
-
   Future deleteUser() {
     return userCollection.document(uid).delete();
   }
