@@ -29,7 +29,7 @@ Die Abbildung
 stellt die möglichen Anwendungsfälle für die dar.
 
 <figure>
-<img src="images/map/use_case_diagramm_Corona-Hep-App.png" id="fig:use_case_diagramm_Corona-Hep-App" style="width:12.6cm" alt="Use Case Diagramm - . " /><figcaption aria-hidden="true">Use Case Diagramm - . </figcaption>
+<img src="docs/img/use_case_diagramm_Corona-Hep-App.png" id="fig:use_case_diagramm_Corona-Hep-App" style="width:12.6cm" alt="Use Case Diagramm - . " /><figcaption aria-hidden="true">Use Case Diagramm - Corona-Help-App </figcaption>
 </figure>
 
 ### Erstellung, Änderung oder Löschung von Hilfsanträge
@@ -207,7 +207,7 @@ Der Anwendung werden die folgenden Entitäten zugeordnet:
     Beschreibung und ein Datum.
 
 <figure>
-<img src="images/map/database_schema_Corona-Help-App.png" id="fig:database_schema_Corona-Help-App" style="width:15cm" alt="Datenbankschema - Corona-Help-App. " /><figcaption aria-hidden="true">Datenbankschema - Corona-Help-App. </figcaption>
+<img src="docs/img/database_schema_Corona-Help-App.png" id="fig:database_schema_Corona-Help-App" style="width:15cm" alt="Datenbankschema - Corona-Help-App. " /><figcaption aria-hidden="true">Datenbankschema - Corona-Help-App. </figcaption>
 </figure>
 
 Implementierung
@@ -226,15 +226,7 @@ Navigation
 eine **BottomNavigationBa**r wurde für die Navigation in der Anwendung
 verwendet. alle Routen sind in der Tabelle **\_routes** enthalten.
 
-    [language=Java,
-    % linebackgroundcolor={%
-    %         \ifnum\value{lstnumber}>1
-    %             \ifnum\value{lstnumber}<4
-    %                 \color{green!35}
-    %             \fi
-    %         \fi}
-    ]
-      static List<Widget> _routes = [
+    static List<Widget> _routes = [
         HomePage(),
         CreateServicesPage(),
         ListMyServicesPage(),
