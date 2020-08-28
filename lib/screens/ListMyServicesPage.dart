@@ -26,11 +26,6 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
   Widget _buildList() {
     _user = AuthService().getCurrentUser(context);
     if (_user != null) {
-      List<User> temp = [];
-//      print(_userServices);
-//      for(Service s in _userServices){
-//        print(s.helpReceiver);
-//      }
       _userServices = Service.all(context);
       _userServices?.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       _userServices = _userServices
@@ -38,7 +33,6 @@ class _ListMyServicesPageState extends State<ListMyServicesPage> {
               (element.helpProvider == _user.id) ||
               (element.helpReceiver == _user.id))
           ?.toList();
-//      print(_userServices?.length);
     }
     return _getServicesListWidget();
   }

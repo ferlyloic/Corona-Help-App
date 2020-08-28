@@ -54,8 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   _profileView() {
-//    print("entering method profileView");
-//    print("_users = ${_user}");
     return _user != null
         ? RefreshIndicator(
             onRefresh: _getData,
