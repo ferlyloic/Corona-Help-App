@@ -2,7 +2,6 @@ import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/location.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/models/user_role.dart';
-import 'package:coronahelpapp/screens/shared/address_autocompletion.dart';
 import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';

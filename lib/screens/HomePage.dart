@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/service_category.dart';

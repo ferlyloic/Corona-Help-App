@@ -4,7 +4,6 @@ import 'package:coronahelpapp/models/service_category.dart';
 import 'package:coronahelpapp/models/service_status.dart';
 import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/models/user_role.dart';
-import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:coronahelpapp/screens/shared/loading.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:coronahelpapp/services/validation_service.dart';
@@ -63,35 +62,6 @@ class _CreateServicePageState extends State<CreateServicePage> {
             ),
             SizedBox(height: 20)
           ]);
-  }
-
-  setChosenCategory(ServiceCategory category) {
-    chosenCategory = category;
-    setState(() {
-      this.textOverCategories = category == null
-          ? 'Wähle eine Kategorie aus'
-          : "Kategory ${category.name} ausgewählt.";
-    });
-//    // flutter defined function
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        // return object of type Dialog
-//        return AlertDialog(
-//          title:  Text("Kategory $chosenCategoryIndex ausgewählt."),
-//          content: Text("Alert Dialog body"),
-//          actions: <Widget>[
-//            // usually buttons at the bottom of the dialog
-//            new FlatButton(
-//              child: new Text("Close"),
-//              onPressed: () {
-//                Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
   }
 
   _getCreateServiceFormView() {
@@ -161,7 +131,6 @@ class _CreateServicePageState extends State<CreateServicePage> {
                           ValidationService val = ValidationService(arg);
                           val.minLength(15);
                           val.minWordCharacterNumber(1);
-//                  val.hasNoWhiteSpaces();
                           return val.errorResult();
                         },
                         decoration: InputDecoration(labelText: "Description")),

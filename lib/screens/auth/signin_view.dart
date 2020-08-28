@@ -128,10 +128,6 @@ class SignInViewState extends State<SignInView> {
                       onPressed: () async {
                         print("load RegisterView");
                         widget.toggleView();
-//                  Navigator.push(
-//                    context,
-//                    MaterialPageRoute(builder: (context) => RegisterView()),
-//                  );
                       }),
                 ],
               ),

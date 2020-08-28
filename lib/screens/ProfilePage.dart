@@ -1,17 +1,10 @@
 import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/models/user.dart';
-import 'package:coronahelpapp/screens/auth/authenticate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 import 'package:coronahelpapp/services/auth_service.dart';
-import 'package:coronahelpapp/screens/auth/signin_view.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String titleString = "Profil";

@@ -4,7 +4,6 @@ import 'package:coronahelpapp/models/user.dart';
 import 'package:coronahelpapp/services/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'SingleServiceView.dart';
 
 class ListMyServicesPage extends StatefulWidget {

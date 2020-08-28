@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:coronahelpapp/main.dart';
 import 'package:coronahelpapp/screens/auth/signin_view.dart';
 import 'package:coronahelpapp/screens/auth/register_view.dart';
