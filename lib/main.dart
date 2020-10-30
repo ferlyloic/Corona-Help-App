@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
         StreamProvider<List<Service>>.value(value: Service().services),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Corona Help App',
         theme: ThemeData(
           primarySwatch: defaultPrimaryColor,
