@@ -80,6 +80,7 @@ class Service extends DefaultModel {
       var service = Service();
       service.id = doc.documentID;
       service.helpReceiver = doc.data['help_receiver'];
+      service.helpProvider = doc.data['help_provider'];
       service.category = doc.data['category'];
       service.description = doc.data['description'];
       service.createdAt = DateTime.tryParse(doc.data['created_at']);
